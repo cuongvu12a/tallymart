@@ -1,0 +1,63 @@
+<!doctype html>
+<!-- Browser test for system-tour.html. Run with headless Chrome; see SKILL.md step 7.
+     URL: browser_test.html?t=<file URL of system-tour.html>[&dump=en|vi] -->
+<meta charset="utf-8">
+<title>Tour browser test</title>
+<pre id="out">running</pre>
+<iframe id="f" style="width:1300px;height:900px"></iframe>
+<script>
+const out = [], log = s => out.push(s), wait = ms => new Promise(r => setTimeout(r, ms));
+const q = new URLSearchParams(location.search), f = document.getElementById('f');
+f.src = q.get('t');
+f.onload = async () => {
+  try {
+    const w = f.contentWindow, d = w.document;
+    try { w.localStorage.clear(); } catch (e) {}
+    if (q.get('dump')) {  // Print the visible text of Presentation mode in one language.
+      w.tourState.lang = q.get('dump'); w.tourState.pres = true; w.tourApply(); await wait(1500);
+      d.querySelectorAll('.panel').forEach(p => p.classList.add('active'));
+      d.querySelectorAll('figure.dg').forEach(x => x.remove());
+      log(d.querySelector('main').innerText);
+    } else {
+      const tabs = [...d.querySelectorAll('.tabs button')].map(b => b.dataset.t);
+      log('tabs: ' + tabs.join(', '));
+      for (const lang of ['en', 'vi']) for (const pres of [false, true]) {
+        w.tourState.lang = lang; w.tourState.pres = pres; w.tourApply(); await wait(4000);
+        let shown = 0, hidden = 0, errors = 0, marks = 0;
+        d.querySelectorAll('figure.dg').forEach(fg => {
+          if (getComputedStyle(fg).display === 'none') { hidden++; return; }
+          if (fg.querySelector('svg')) shown++;
+          if (/Diagram error/.test(fg.textContent)) errors++;
+          if (/❓/.test(fg.querySelector('svg')?.textContent || '')) marks++;
+        });
+        const leaks = new Set();
+        if (pres) {
+          d.querySelectorAll('.panel').forEach(p => p.classList.add('active'));
+          const tw = d.createTreeWalker(d.querySelector('main'), NodeFilter.SHOW_TEXT);
+          let n;
+          while ((n = tw.nextNode())) {
+            const el = n.parentElement;
+            if (!el || el.closest('svg') || el.offsetParent === null) continue;
+            const m = n.nodeValue.match(/Q-\d\d|❓|Proposed|Undecided|_pending_/);
+            if (m) leaks.add(m[0] + ': ' + n.nodeValue.trim().slice(0, 70));
+          }
+          d.querySelector('.tabs button').click();
+        }
+        log(`${lang}${pres ? ' presentation' : ''}: diagrams shown=${shown} hidden=${hidden} errors=${errors} with-markers=${marks} text-leaks=${leaks.size}`);
+        [...leaks].slice(0, 20).forEach(l => log('   leak ' + l));
+      }
+      w.tourState.lang = 'en'; w.tourState.pres = false; w.tourApply(); await wait(2000);
+      const missing = [...d.querySelectorAll('a[href^="#"]')].map(a => a.getAttribute('href').slice(1)).filter(id => id && !d.getElementById(id));
+      log('anchors missing: ' + missing.length + ' ' + [...new Set(missing)].join(','));
+      log('marker links: text=' + d.querySelectorAll('a.q').length + ' flowchart=' + d.querySelectorAll('a.qlink').length + ' sequence=' + d.querySelectorAll('text.qtext').length);
+      const a = d.querySelector('a.qlink');
+      if (a) { a.click(); await wait(800); log('flowchart marker click -> ' + w.location.hash + ' row=' + (d.querySelector('tr.hl')?.id || 'none')); }
+      const t = d.querySelector('text.qtext');
+      if (t) { t.dispatchEvent(new MouseEvent('click', {bubbles: true})); await wait(800); log('sequence marker click -> ' + w.location.hash); }
+      const files = [...new Set([...d.querySelectorAll('a[href]')].map(x => x.getAttribute('href')).filter(h => !h.startsWith('#')).map(h => h.split('#')[0]))];
+      log('linked files: ' + files.join(' '));
+    }
+  } catch (e) { log('TEST ERROR ' + e.stack); }
+  document.getElementById('out').textContent = out.join('\n');
+};
+</script>
