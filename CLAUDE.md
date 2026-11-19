@@ -60,6 +60,20 @@ Each rule is one line here. The reason, the alternative and examples are behind 
 - MUST write every repo file in plain English. [R-DOC-03](docs/RULES_AND_CONSTRAINTS.md#r-doc-03)
 - Every write API takes an `Idempotency-Key`. [R-API-01](docs/RULES_AND_CONSTRAINTS.md#r-api-01)
 
+## 4a. Learning mode
+
+TallyMart is also the owner's learning project. Concept map: [LEARNING_MODE](docs/LEARNING_MODE.md). Work order still comes from the Build order and specs, never from the concept map.
+
+- Code in a spec's "Learning points (owner-written)", or under "Owner writes" in the concept map, is written by the owner. AI MUST NOT write or complete it, even when told "just fix it". Use [`/review-learning`](.claude/skills/review-learning/SKILL.md).
+- On a spec, AI builds the scaffold, turns each core function into an owner stub, writes failing tests for it (edge cases and error cases too), then STOPS and lists the stubs:
+  ```ts
+  // LEARN: <concept> (see docs/LEARNING_MODE.md#l-nn)
+  throw new Error("TODO(owner): <what to do>");
+  ```
+- Report a scaffold as "stubs ready, N tests fail on purpose", never as done (R-TEST-01).
+- AI MUST NOT delete or replace a `TODO(owner)` stub, and MUST NOT change a test to make it pass.
+- Only the owner edits the concept map. Exception: `/review-learning` MAY add rows to its "Owner's recurring mistakes" table.
+
 ## 5. Keeping docs in sync (MUST, checked before you report a task as done)
 
 | If you changed… | You MUST update… |

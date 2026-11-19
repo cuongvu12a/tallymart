@@ -191,3 +191,4 @@ ADRs live in [decisions/](decisions/README.md) as `NNNN-<short-name>.md`.
 | [`/close-question`](../.claude/skills/close-question/SKILL.md) | Moves an owner's decision from OPEN_QUESTIONS.md into the affected docs | After the owner fills in a `Decision` |
 | [`/propose-adr`](../.claude/skills/propose-adr/SKILL.md) | Creates a proposed ADR with the next number and adds it to the index | When a technology, library or major structure is chosen or changed |
 | [`/invariant-test`](../.claude/skills/invariant-test/SKILL.md) | Writes tests that prove R-INV-01, R-LED-01 and R-PAY-01, using fakes only | When a change touches stock, payments, IPNs or ledger entries |
+| [`/review-learning`](../.claude/skills/review-learning/SKILL.md) | Reviews owner-written learning-point code: check, review, hint, compare, contrast. Never edits the owner's code ([LEARNING_MODE](LEARNING_MODE.md)) | When the owner asks for a review, a hint or a comparison |

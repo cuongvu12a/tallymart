@@ -29,8 +29,9 @@ How to write docs: [docs/README.md](../../../docs/README.md). Do not copy the te
 6. Fill "Behavior" as a table: condition → behavior → example. Use [GLOSSARY](../../../docs/GLOSSARY.md) terms only.
 7. Fill "Edge cases" with at least: concurrency, external failure (slow, down, duplicate), and repeated request (R-API-01).
 8. Write "Acceptance criteria": each item is a test or a measurement. If the work touches stock or money, add an item that uses the `invariant-test` skill.
-9. Fill "Docs to update when done" from the [CLAUDE.md sync table](../../../CLAUDE.md#5-keeping-docs-in-sync-must-checked-before-you-report-a-task-as-done).
-10. Show the spec to the owner and wait for approval before writing code.
+9. Propose "Learning points (owner-written)" from the [concept map](../../../docs/LEARNING_MODE.md#concept-map): the `L-NN` concepts this work practices and the functions or files the owner writes. The owner confirms or edits the list. Write "None" if there are none.
+10. Fill "Docs to update when done" from the [CLAUDE.md sync table](../../../CLAUDE.md#5-keeping-docs-in-sync-must-checked-before-you-report-a-task-as-done).
+11. Show the spec to the owner and wait for approval before writing code.
 
 ## Edge cases
 
