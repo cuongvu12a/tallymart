@@ -16,7 +16,7 @@ Writes tests that prove the two core invariants and the IPN rule still hold. Sha
 ## Stop and ask when
 
 - The code under test does not exist yet → STOP. Report which module is missing.
-- A test needs a value that an open question still holds (for example the TTL in Q-14 or the accounts in Q-18) → STOP. Name the `Q-NN`; do not pick a value.
+- A test needs a value that an open question still holds (for example the TTL value, which waits for Q-22) → STOP. Name the `Q-NN`; do not pick a value.
 - Making a test pass seems to need a real sandbox → STOP. Tests MUST use the fake implementation ([R-INT-02](../../../docs/RULES_AND_CONSTRAINTS.md#r-int-02)). Extend the fake instead, or ask.
 - A new test dependency is needed (for example a concurrency helper) → STOP and ask (R-REPO-04).
 

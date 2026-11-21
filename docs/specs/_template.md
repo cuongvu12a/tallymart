@@ -53,9 +53,13 @@ The concepts this spec practices, from the [concept map](../LEARNING_MODE.md#con
 
 -
 
-## Open questions
+## Questions this work needs
 
-> OPEN QUESTION Q-NN: <short question>. DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-nn)
+Link each question the work touches, with its Decision. Do not copy a question here: it lives only in [OPEN_QUESTIONS](../OPEN_QUESTIONS.md). A question with `Decision: _pending_` stops the spec ([`/start-spec`](../../.claude/skills/start-spec/SKILL.md)).
+
+| Question | Decision |
+|---|---|
+| [Q-NN](../OPEN_QUESTIONS.md#q-nn) | <one line> |
 
 ## Docs to update when done
 

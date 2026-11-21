@@ -23,9 +23,9 @@ Checks that docs match what changed, then overwrites [STATUS.md](../../../STATUS
    Add commits made in this session, if any: `git log --oneline` since the session started.
 2. Run tests and lint: `TODO (TM-repo-setup)`. Until the commands exist, write "tests and lint: not available yet" in the report.
 3. Walk the sync table row by row. For each row, write one of: "updated <file>", "not needed: <reason>", or "unsure: <reason>". Pure refactors, formatting, and internal renames need no doc change.
-4. Make the doc updates found in step 3. Set `last_verified` only on docs you actually compared with the code.
+4. Make the doc updates found in step 3. Set `last_verified` only on docs you actually checked, as defined in [docs/README: `last_verified`](../../../docs/README.md#last_verified).
 5. If `scripts/check-docs.sh` exists, run it and fix what it reports. If it does not exist, say so in the report.
-6. If an architectural decision was made, propose an ADR with the `propose-adr` skill.
+6. If an architectural decision was made, propose an ADR with the `propose-adr` skill. If the session built or decided a business rule or technique worth studying, check that a [learning note](../../../docs/learning-notes/README.md) exists for it.
 7. If you made a mistake that an AI could repeat, propose one line for CLAUDE.md "Recurring AI mistakes". Add it only after the owner agrees.
 8. Overwrite `STATUS.md`. Never append. Keep these sections: Done / In progress / Blocked / Next, plus `Last updated: <today>`. Remove items that are no longer true. Keep it at 50 lines or fewer:
    ```

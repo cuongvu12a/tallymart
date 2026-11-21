@@ -13,9 +13,9 @@ Two core invariants. Every change MUST protect them:
 - **Stock is never oversold:** [R-INV-01](docs/domain/inventory.md#r-inv-01)
 - **The ledger always balances (sum of entries = 0):** [R-LED-01](docs/domain/ledger.md#r-led-01)
 
-Non-goals are not decided yet: [Q-07](docs/OPEN_QUESTIONS.md#q-07). DO NOT assume.
+Non-goals and later learning extensions: [PROJECT_OVERVIEW: Non-goals](docs/PROJECT_OVERVIEW.md#non-goals). MUST NOT build a learning extension unless the owner moves it into scope.
 In the README, a "Phase" is a capability group, not a timeline ([GLOSSARY](docs/GLOSSARY.md#technical-terms)). Ignore the README dates and sprint numbers.
-What to build next: [Build order](docs/PROJECT_OVERVIEW.md#build-order), a proposal until [Q-09](docs/OPEN_QUESTIONS.md#q-09) is decided.
+What to build next: [Build order](docs/PROJECT_OVERVIEW.md#build-order) (decided in Q-09; it is the plan, Q-45).
 Sources of truth: [docs/README: Sources of truth](docs/README.md#sources-of-truth). Anything else is an OPEN QUESTION.
 
 ## 2. When you… → read first
@@ -28,7 +28,7 @@ Sources of truth: [docs/README: Sources of truth](docs/README.md#sources-of-trut
 | Write or change any code | [RULES_AND_CONSTRAINTS](docs/RULES_AND_CONSTRAINTS.md), [CONVENTIONS](docs/CONVENTIONS.md) |
 | Add a module, a service or a data flow | [ARCHITECTURE](docs/ARCHITECTURE.md) |
 | Work on a TM-xx issue | `docs/specs/TM-xx-<name>.md` if it exists ([template](docs/specs/_template.md)) |
-| Decide what to build next | [PROJECT_OVERVIEW: Build order](docs/PROJECT_OVERVIEW.md#build-order) (a proposal until Q-09 is decided) |
+| Decide what to build next | [PROJECT_OVERVIEW: Build order](docs/PROJECT_OVERVIEW.md#build-order) |
 | Meet a question nobody has decided | [OPEN_QUESTIONS](docs/OPEN_QUESTIONS.md) |
 | Choose a technology, library or major structure | [decisions/README](docs/decisions/README.md) |
 | Write or edit any doc | [docs/README](docs/README.md) |
@@ -43,7 +43,7 @@ TODO (TM-repo-setup): install, build, test, lint, typecheck, run, regenerate the
 - The commands under "Getting started" in the README are planned. They do not run yet. MUST NOT run or invent commands.
 - **A task is done only when tests + lint pass** ([R-TEST-01](docs/RULES_AND_CONSTRAINTS.md#r-test-01)). If they cannot run yet, say so in your report. A docs-only task has its own Definition of Done in R-TEST-01.
 
-> OPEN QUESTION Q-10: Lint, format and test tooling; which test levels count for "done"? DO NOT assume. → [details](docs/OPEN_QUESTIONS.md#q-10)
+- Tools: [CONVENTIONS: Tooling](docs/CONVENTIONS.md#tooling). Test levels per change: [R-TEST-03](docs/RULES_AND_CONSTRAINTS.md#r-test-03). Branches, commits, PRs: [CONVENTIONS: Git](docs/CONVENTIONS.md#git); only the owner merges.
 
 ## 4. Hard rules
 
@@ -72,7 +72,8 @@ TallyMart is also the owner's learning project. Concept map: [LEARNING_MODE](doc
   ```
 - Report a scaffold as "stubs ready, N tests fail on purpose", never as done (R-TEST-01).
 - AI MUST NOT delete or replace a `TODO(owner)` stub, and MUST NOT change a test to make it pass.
-- Only the owner edits the concept map. Exception: `/review-learning` MAY add rows to its "Owner's recurring mistakes" table.
+- AI MAY edit the concept map to keep it true (links, decided questions, Build-order steps, new rows). AI MUST NOT shrink an "Owner writes" cell, confirm an `OWNER TO CONFIRM` row, or remove a concept without the owner's word. Details: [LEARNING_MODE: Who edits this file](docs/LEARNING_MODE.md#who-edits-this-file).
+- When a task builds or decides a business rule or a technique worth studying, AI writes a learning note for the owner (in Vietnamese, an R-DOC-03 exception) and lists it in the report: [docs/learning-notes/](docs/learning-notes/README.md).
 
 ## 5. Keeping docs in sync (MUST, checked before you report a task as done)
 
@@ -85,6 +86,7 @@ TallyMart is also the owner's learning project. Concept map: [LEARNING_MODE](doc
 | Chose or changed a technology, library or a major structure | propose a new ADR in [docs/decisions/](docs/decisions/README.md) |
 | Build / test / run commands, environment variables | CLAUDE.md "Commands" + [docs/runbooks/](docs/runbooks/README.md) |
 | Changed a source listed in `SYSTEM_TOUR.md` `derived_from` | run [`/update-tour`](.claude/skills/update-tour/SKILL.md): it regenerates [docs/overview/SYSTEM_TOUR.md](docs/overview/SYSTEM_TOUR.md), then `system-tour.html` |
+| Built or decided a business rule or technique worth studying | a note in [docs/learning-notes/](docs/learning-notes/README.md) |
 | Progress, unfinished work, blockers | [STATUS.md](STATUS.md) (end of session) |
 
 - A pure refactor, formatting, or renaming internal variables needs no doc change.
@@ -109,6 +111,6 @@ Run the [`/end-session`](.claude/skills/end-session/SKILL.md) skill. It covers t
 
 ## 8. Recurring AI mistakes
 
-Add one line per mistake when it happens: what went wrong → what to do instead.
+When a mistake happens, propose one line (what went wrong → what to do instead). Add it only after the owner agrees. Process: [docs/README](docs/README.md).
 
 <!-- none yet -->

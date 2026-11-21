@@ -1,7 +1,7 @@
 ---
 status: active
 owner: Cuong Vu
-last_verified: 2026-11-16
+last_verified: 2026-11-21
 applies_to: [docs]
 related_code: []
 ---
@@ -10,9 +10,11 @@ related_code: []
 
 This file says HOW to write docs. WHEN to update them is in the sync table in [CLAUDE.md](../CLAUDE.md#5-keeping-docs-in-sync-must-checked-before-you-report-a-task-as-done). That table lives only there.
 
-> OPEN QUESTION Q-48: Which file owns the doc process when this file, CLAUDE.md and the skills disagree? DO NOT assume. → [details](OPEN_QUESTIONS.md#q-48)
+This file owns the doc process. CLAUDE.md and the skills in `.claude/skills/` link here and MUST NOT restate a rule from this file differently. If they disagree, this file wins; fix the other file. Source: [Q-48](OPEN_QUESTIONS.md#q-48) decision (owner, 2026-11-21).
 
-> OPEN QUESTION Q-45: How do epics and enabling work become the plan? DO NOT assume. → [details](OPEN_QUESTIONS.md#q-45)
+Recurring AI mistakes: an AI session proposes one line for [CLAUDE.md](../CLAUDE.md#8-recurring-ai-mistakes) and adds it only after the owner agrees.
+
+The plan is the [Build order](PROJECT_OVERVIEW.md#build-order); epics in [product/EPICS.md](product/EPICS.md) are a catalog of scope mapped onto its steps ([Q-45](OPEN_QUESTIONS.md#q-45) decision).
 
 ## Sources of truth
 
@@ -63,7 +65,7 @@ ADR files add two fields. See [ADR process](#adr-process).
 
 - Change it ONLY after you have actually compared the doc with the code.
 - MUST NOT change the date without checking. A date that nobody checked makes the field useless, because the audit trusts it.
-- While no code exists, `last_verified` is the date the doc was written or checked against the README and the brief.
+- While no code exists, `last_verified` MAY be set to the date the doc was checked against the README, the brief and the decided answers in OPEN_QUESTIONS. Skills follow this rule ([Q-48](OPEN_QUESTIONS.md#q-48)).
 
 ### `related_code`
 
@@ -97,6 +99,7 @@ Format: `R-<AREA>-NN`, for example `R-INV-01`.
 - Put an anchor before each rule heading so links stay stable: `<a id="r-inv-01"></a>`.
 - A deleted ID is never reused. Mark the rule `(removed YYYY-MM-DD: reason)` and keep the heading.
 - Numbers go up within an area: the next rule after `R-INV-04` is `R-INV-05`.
+- In a spec draft only, a new rule MAY be written as `R-<AREA>-NEW` until the domain doc gives it a real ID. The placeholder MUST NOT appear in `docs/domain/` or [RULES_AND_CONSTRAINTS](RULES_AND_CONSTRAINTS.md).
 
 ### Area codes
 
@@ -165,7 +168,8 @@ ADRs live in [decisions/](decisions/README.md) as `NNNN-<short-name>.md`.
 1. Copy [decisions/0000-template.md](decisions/0000-template.md). Take the next number after the highest existing one.
 2. Set `decision_status: proposed`. The owner accepts or rejects it.
 3. After it is `accepted`, an ADR MUST NOT be edited, because it records what was decided and why at that time.
-4. To change a decision, write a new ADR with `supersedes: [NNNN]`. Update the index in [decisions/README.md](decisions/README.md) to show the old one as superseded.
+4. To change a decision, write a new ADR with `supersedes: [NNNN]`. Update the index in [decisions/README.md](decisions/README.md) to show the old one as superseded. "Superseded" appears only in the index, because the old file MUST NOT be edited.
+5. The doc `status` of an ADR file is `draft` while `proposed`, and `active` once `accepted`. `deprecated` does not apply to ADR files.
 
 | Extra field | Allowed values |
 |---|---|
@@ -179,6 +183,7 @@ ADRs live in [decisions/](decisions/README.md) as `NNNN-<short-name>.md`.
 | Domain doc | [domain/_template.md](domain/_template.md) | `docs/domain/<context>.md` |
 | Spec | [specs/_template.md](specs/_template.md) | `docs/specs/TM-xx-<short-name>.md` |
 | ADR | [decisions/0000-template.md](decisions/0000-template.md) | `docs/decisions/NNNN-<short-name>.md` |
+| Learning note | [learning-notes/README: Note format](learning-notes/README.md#note-format) | `docs/learning-notes/<context or topic>.md` |
 
 ## Tools
 

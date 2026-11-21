@@ -1,7 +1,7 @@
 ---
 status: draft
 owner: Cuong Vu
-last_verified: 2026-11-16
+last_verified: 2026-11-21
 applies_to: [backend, notification]
 related_code: []
 ---
@@ -36,17 +36,24 @@ Email, SMS and push notifications, and tracking whether each one was delivered. 
 - Source: README, External integrations.
 - ✅ Tests check the fake received one email. ❌ Tests send real email through Mailtrap.
 
+<a id="r-ntf-03"></a>
+### R-NTF-03: In the core, notifications are emails for three events
+
+- In the core, Notification MUST send only email: to the Buyer when an Order is paid and when it is delivered; to the Seller when a new paid Order arrives. SMS and push are a [learning extension](../PROJECT_OVERVIEW.md#learning-extensions).
+- Source: [Q-29](../OPEN_QUESTIONS.md#q-29) decision (owner, 2026-11-21).
+- ✅ `OrderPaid` → one email to the Buyer, one to the Seller. ❌ An SMS provider is called in the core.
+
 ## Conditional behavior
 
 None yet.
 
 ## Edge cases
 
-- `OrderPaid` arrives twice → not decided whether two notifications are acceptable: [Q-27](../OPEN_QUESTIONS.md#q-27).
+- `OrderPaid` arrives twice → the handler checks its own sent records and sends once; an inbox is not required for notifications ([R-EVT-02](../RULES_AND_CONSTRAINTS.md#r-evt-02)).
 
 ## Open questions
 
-> OPEN QUESTION Q-29: Which events notify whom, on which channel? DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-29)
+None.
 
 ## Related
 

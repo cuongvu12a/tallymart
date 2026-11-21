@@ -1,7 +1,7 @@
 ---
 status: draft
 owner: Cuong Vu
-last_verified: 2026-11-16
+last_verified: 2026-11-21
 applies_to: [backend, web, repo, docs]
 related_code: []
 ---
@@ -24,7 +24,34 @@ Precedence on conflict: RULES > TM-xx spec > CONVENTIONS > habits.
 - ✅ "ADR 0012: extract Catalog search because p95 is X ms under Y RPS (measured by `<script>`)."
 - ❌ Creating `apps/payment-service` because "it is cleaner".
 
-> OPEN QUESTION Q-01: Folder layout, boundary enforcement and table ownership inside `apps/api`. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-01)
+<a id="r-arch-02"></a>
+### R-ARCH-02: A context owns its tables; other contexts use only its public interface
+
+- Each context MUST own its tables, in its own Postgres schema. Code in another context MUST NOT read or write those tables, and MUST NOT import the context's internals; it calls the context's public interface.
+- A lint rule (`eslint-plugin-boundaries`) MUST block imports into another context's internals, so the boundary is checked by a tool, not by memory.
+- Reason: both invariants depend on one owner per piece of data. Only Inventory code may change Stock ([R-INV-01](domain/inventory.md#r-inv-01)); only Ledger code may write Ledger entries ([R-LED-01](domain/ledger.md#r-led-01)).
+- Alternative: do not query another context's table for convenience → add a method to that context's public interface.
+- Source: [Q-01](OPEN_QUESTIONS.md#q-01) decision (owner, 2026-11-21). Layout: [CONVENTIONS: Code layout](CONVENTIONS.md#code-layout).
+- ✅ Ordering calls Inventory's public `reserve` method. ❌ Ordering runs `UPDATE inventory.stock ...`.
+
+<a id="r-arch-03"></a>
+### R-ARCH-03: Unlabeled arrows are in-process calls; only Payment → Ledger shares a DB transaction
+
+- An unlabeled arrow in [ARCHITECTURE: Data flow](ARCHITECTURE.md#data-flow) MUST be an in-process call through the callee's public interface. A labeled arrow MUST be an event.
+- A DB transaction MUST NOT span two contexts, except Payment → Ledger: recording a payment and writing its Ledger entries MAY share one DB transaction. An ADR records this exception.
+- Reason: a caller needs some answers at once ("is there Stock?"), so those are calls. A payment without its Ledger entries would break [R-LED-01](domain/ledger.md#r-led-01), so that one pair is written atomically. Every other cross-context step that can fail is handled by Compensation ([R-ORD-02](domain/ordering.md#r-ord-02)).
+- Alternative: do not wrap Ordering and Inventory in one shared DB transaction → call Inventory, and compensate if a later step fails.
+- Source: [Q-02](OPEN_QUESTIONS.md#q-02) decision (owner, 2026-11-21).
+- ✅ Payment records an IPN and its Ledger entries in one DB transaction. ❌ Ordering, Inventory and Payment all write in one DB transaction.
+
+<a id="r-arch-04"></a>
+### R-ARCH-04: Admin actions live in the owning context and are recorded in one Audit trail
+
+- An Admin action MUST be implemented in the context that owns the data it changes, and MUST be recorded in the Audit trail in one shared format: who, what, when, the value before and after.
+- Reason: keeping Admin actions in the owning context keeps rules like "only Ledger writes Ledger entries" true; one format lets every action be reviewed the same way.
+- Alternative: do not build a separate back-office that writes other contexts' tables → call the owning context's public interface.
+- Source: [Q-41](OPEN_QUESTIONS.md#q-41) decision (owner, 2026-11-21). Fraud tools are a [learning extension](PROJECT_OVERVIEW.md#learning-extensions).
+- ✅ An Admin correction is a new pair of Ledger entries written by Ledger, with an Audit trail row. ❌ An Admin tool updates a Seller wallet row directly.
 
 ## HTTP API
 
@@ -34,18 +61,30 @@ Precedence on conflict: RULES > TM-xx spec > CONVENTIONS > habits.
 - Every API that changes state MUST accept an `Idempotency-Key` header. A repeated request with the same key MUST have the effect of exactly one request.
 - Reason: a user who clicks "Place order" twice on a flaky network must not get two Orders or two Payments.
 - Source: README, The problem.
-- ✅ Two `POST` requests with the same key → one Order. What the second response returns: Not decided ([Q-04](OPEN_QUESTIONS.md#q-04)).
+- ✅ Two `POST` requests with the same key → one Order; the second response is the stored first response.
 - ❌ Two `POST` requests with the same key → two Orders.
 
 | Condition | Behavior |
 |---|---|
-| Same key, same body, first request finished | Not decided: [Q-04](OPEN_QUESTIONS.md#q-04) |
-| Same key, different body | Not decided: [Q-04](OPEN_QUESTIONS.md#q-04) |
-| Same key, first request still running | Not decided: [Q-04](OPEN_QUESTIONS.md#q-04) |
-| Key missing | Not decided: [Q-04](OPEN_QUESTIONS.md#q-04) |
+| Same key, same body, first request finished | Return the stored response; no new effect |
+| Same key, different body | 422 |
+| Same key, first request still running | 409; the client retries later |
+| Key missing on a write API | 400 |
+| Key older than 24 hours | Treated as a new key |
 
-> OPEN QUESTION Q-04: Storage, TTL, replay behavior and status codes for `Idempotency-Key`. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-04)
-> OPEN QUESTION Q-03: What is the API error format and the list of status codes? DO NOT assume. → [details](OPEN_QUESTIONS.md#q-03)
+- Storage: a Postgres table with a unique `(user, endpoint, key)` row, the request hash and the stored response, inserted in the same DB transaction as the business write. A cleanup job removes rows older than the TTL. Redis MAY be added later as a fast first check, never as the only one.
+- IPNs and carrier webhooks do not send the header. The endpoint derives the key from the provider's ID and uses the same table; a repeat gets the stored first reply ([R-PAY-01](domain/payment.md#r-pay-01)).
+- Source of the behavior: [Q-04](OPEN_QUESTIONS.md#q-04) decision (owner, 2026-11-21).
+
+<a id="r-api-02"></a>
+### R-API-02: Errors use Problem Details with a stable `code`
+
+- Every error response MUST be RFC 9457 Problem Details (`application/problem+json`: `type`, `title`, `status`, `detail`) plus a stable, machine-readable `code` field.
+- Status codes: 400 validation, 401 not signed in, 403 no permission, 404 not found, 409 a Stock or state conflict or an `Idempotency-Key` still in progress, 422 an `Idempotency-Key` reused with a different body, 429 rate limited.
+- Reason: the client must tell "retry is safe" apart from "do not retry", and a stable `code` makes that testable. One format also lets the generated client type every error.
+- Alternative: do not return the framework's default error body or a free-text message → return Problem Details with a `code`.
+- Source: [Q-03](OPEN_QUESTIONS.md#q-03) decision (owner, 2026-11-21).
+- ✅ `409 {"type": "...", "title": "Not enough Stock", "status": 409, "code": "STOCK_NOT_ENOUGH"}` · ❌ `500 {"message": "error"}`
 
 ## Events
 
@@ -53,15 +92,23 @@ Precedence on conflict: RULES > TM-xx spec > CONVENTIONS > habits.
 ### R-EVT-01: A DB change and its event MUST NOT diverge
 
 - When a DB write must produce an event, the event MUST be recorded through a Transactional Outbox in the same DB transaction.
-- When the Outbox is built (with the first cross-context event, or later): Not decided ([Q-26](OPEN_QUESTIONS.md#q-26)). The README names the Outbox as the solution, not when to build it.
-- Once the Outbox exists, do not publish to the broker directly after the commit, because the publish can fail after the commit → write to the outbox, and let a relay publish it.
+- The Outbox is built with the first cross-context event ([Q-26](OPEN_QUESTIONS.md#q-26) decision, owner, 2026-11-21).
+- Do not publish to the broker directly after the commit, because the publish can fail after the commit → write to the outbox, and let a relay publish it.
 - Reason: "order paid but nobody ships it".
 - Source: README, The problem.
 - ✅ Order status update and outbox row in one transaction; a relay publishes `OrderPaid`.
 - ❌ `commit()` then `broker.publish()`; the process crashes between them.
 
-> OPEN QUESTION Q-26: Build the Outbox with the first cross-context event, or publish directly first and add it later? DO NOT assume. → [details](OPEN_QUESTIONS.md#q-26)
-> OPEN QUESTION Q-27: Retries, DLQ handling and consumer deduplication. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-27)
+<a id="r-evt-02"></a>
+### R-EVT-02: A consumer that touches money, Stock or e-invoices uses an inbox
+
+- Events are delivered at least once, so a consumer can see the same event twice. A handler that changes money, Stock or e-invoices MUST record the event ID in an inbox table in the same DB transaction as its change, and skip an event ID it has already processed.
+- A notification handler MAY rely on its own state instead (natural idempotency).
+- After its retries run out, a message goes to the DLQ. Retry counts are set after measurement.
+- Reason: a repeated `Delivered` must not pay a Seller twice; an inbox makes "one event, one effect" testable the same way for every money handler.
+- Alternative: do not rely on each money handler inventing its own duplicate check → use the inbox.
+- Source: [Q-27](OPEN_QUESTIONS.md#q-27) decision (owner, 2026-11-21).
+- ✅ `Delivered` arrives twice → one Money release. ❌ `Delivered` arrives twice → two Money releases.
 
 ## External integrations
 
@@ -108,6 +155,23 @@ Precedence on conflict: RULES > TM-xx spec > CONVENTIONS > habits.
 | Changes only docs (no code, config or tests) | Every link resolves; `scripts/check-docs.sh` passes (if it exists); the consistency checks in [`/audit-docs`](../.claude/skills/audit-docs/SKILL.md) pass |
 
 - Source of the docs-only row: owner decision, 2026-11-16.
+
+<a id="r-test-03"></a>
+### R-TEST-03: Each kind of change needs its test level
+
+- A change to code MUST come with the tests its kind needs, from the table below. A test that proves a rule MUST name the rule ID in its test name.
+- Reason: the invariants are only proven by the right kind of test; a unit test with mocks cannot show an Oversell under concurrent requests. Rule IDs in test names let [`/audit-docs`](../.claude/skills/audit-docs/SKILL.md) find where each rule is enforced.
+- Alternative: do not count a unit test with a mocked DB as proof for stock or Ledger code → write the concurrency test against a real DB.
+- Source: [Q-10](OPEN_QUESTIONS.md#q-10) decision (owner, 2026-11-21).
+
+| Change | Required tests |
+|---|---|
+| A rule with an ID | A unit test whose name contains the rule ID |
+| DB or messaging code | An integration test with Testcontainers |
+| Anything that touches Stock or the Ledger | A concurrency test that proves [R-INV-01](domain/inventory.md#r-inv-01) or [R-LED-01](domain/ledger.md#r-led-01) |
+| An external integration | A test with the Fake implementation, including duplicates and timeouts |
+
+- ✅ `it("R-INV-01: 50 concurrent reservations on Stock 10 never oversell")` · ❌ `it("works")`
 
 <a id="r-test-02"></a>
 ### R-TEST-02: Every published number is measured by a script in the repo
@@ -181,7 +245,7 @@ Precedence on conflict: RULES > TM-xx spec > CONVENTIONS > habits.
 ### R-DOC-03: All repo files are in plain English
 
 - Every file in the repo (code, comments, commits, docs, skills) MUST be in plain English: short sentences, common words, no idioms.
-- Vietnamese MAY appear only in the GLOSSARY "Vietnamese (spoken)" column and in the generated `docs/overview/system-tour.html` (its VI translation) → use the English term everywhere else. Source of the exception: owner decision, 2026-11-16.
+- Vietnamese MAY appear only in the GLOSSARY "Vietnamese (spoken)" column, in the generated `docs/overview/system-tour.html` (its VI translation), and in [docs/learning-notes/](learning-notes/README.md) (study notes for the owner; GLOSSARY terms stay in English) → use the English term everywhere else. Source of the exceptions: owner decisions, 2026-11-16 and 2026-11-21.
 - Reason (proposed by AI, owner to confirm): AI sessions and future readers read every file; short plain-English sentences leave less room for a wrong reading.
 - Alternative (proposed by AI, owner to confirm): instead of an idiom or a Vietnamese word, write the plain English sentence and use the GLOSSARY term.
 - Source: project brief.
