@@ -21,54 +21,57 @@ The only place where undecided questions, their options and their analysis live.
 
 | ID | ★ | Question | Affected docs | Status |
 |---|---|---|---|---|
-| [Q-01](#q-01) | ★ | Folder layout, boundaries and table ownership in `apps/api` | RULES, ARCHITECTURE, CONVENTIONS | open |
-| [Q-02](#q-02) | ★ | How contexts call each other | ARCHITECTURE, inventory, ledger, ordering, payment, reconciliation | open |
-| [Q-03](#q-03) | ★ | API error format and status codes | RULES, CONVENTIONS, identity | open |
-| [Q-04](#q-04) | ★ | `Idempotency-Key` behavior and storage | RULES, ARCHITECTURE, PROJECT_OVERVIEW, decisions/README, payment | open |
-| [Q-05](#q-05) | ★ | Can one order hold products from several sellers? | GLOSSARY, product/EPICS, ordering, shipping | open |
-| [Q-06](#q-06) | ★ | Roles, token lifetime, admin powers | PROJECT_OVERVIEW, GLOSSARY, product/EPICS, identity | open |
-| [Q-07](#q-07) | ★ | Non-goals | PROJECT_OVERVIEW, CLAUDE.md | open |
-| [Q-08](#q-08) | ★ | Branch names, commit format, PR flow | CONVENTIONS | open |
-| [Q-09](#q-09) | ★ | Approve the build order; which module is first | PROJECT_OVERVIEW, CLAUDE.md, product/EPICS, catalog, start-spec skill | open |
-| [Q-10](#q-10) | ★ | Lint, format and test tooling; test levels for "done" | CONVENTIONS, CLAUDE.md | open |
-| [Q-11](#q-11) | | Seller eKYC: required before what? | GLOSSARY, product/EPICS, identity | open |
-| [Q-12](#q-12) | | Currency and money storage | CONVENTIONS, GLOSSARY, product/EPICS, catalog, ledger | open |
-| [Q-13](#q-13) | | What is a variant; where do price and stock live? | PROJECT_OVERVIEW, GLOSSARY, product/EPICS, catalog, inventory | open |
-| [Q-14](#q-14) | | Stock reservation lifecycle and TTL | GLOSSARY, product/EPICS, inventory, ordering, invariant-test skill | open |
-| [Q-15](#q-15) | | DB-level locking strategy for stock | product/EPICS, inventory | open |
-| [Q-16](#q-16) | | Per-user rate limit values and algorithm | product/EPICS, inventory | open |
-| [Q-17](#q-17) | | What exactly is a flash sale? | GLOSSARY, product/EPICS, inventory | open |
-| [Q-18](#q-18) | | Ledger accounts | GLOSSARY, product/EPICS, ledger, invariant-test skill | open |
-| [Q-19](#q-19) | | Marketplace fee rate and timing | GLOSSARY, product/EPICS, ledger | open |
-| [Q-20](#q-20) | | Successful delivery, return window, withdrawal rules | GLOSSARY, product/EPICS, ledger | open |
-| [Q-21](#q-21) | | Payment method → provider mapping | GLOSSARY, product/EPICS, payment | open |
-| [Q-22](#q-22) | | Re-query schedule and payment timeout | GLOSSARY, product/EPICS, ordering, payment | open |
-| [Q-23](#q-23) | | Refund flow and ledger entries | product/EPICS, ledger, payment | open |
-| [Q-24](#q-24) | | Order states and transitions | ARCHITECTURE, GLOSSARY, product/EPICS, ordering, shipping | open |
-| [Q-25](#q-25) | | Checkout saga steps and compensation | ARCHITECTURE, GLOSSARY, product/EPICS, ordering, payment | open |
-| [Q-26](#q-26) | | Outbox with the first event, or later? | RULES, ARCHITECTURE, PROJECT_OVERVIEW, decisions/README | open |
-| [Q-27](#q-27) | | Retries, DLQ, consumer deduplication | RULES, ARCHITECTURE, invoicing, ledger, notification | open |
-| [Q-28](#q-28) | | Shipment event key and state machine | product/EPICS, ordering, shipping | open |
-| [Q-29](#q-29) | | Which events notify whom, on which channel | ARCHITECTURE, product/EPICS, notification | open |
-| [Q-30](#q-30) | | Who issues e-invoices, for what, and when | ARCHITECTURE, product/EPICS, invoicing | open |
-| [Q-31](#q-31) | | Reconciliation sources and mismatch handling | ARCHITECTURE, GLOSSARY, product/EPICS, reconciliation | open |
-| [Q-32](#q-32) | | Performance targets per capability | PROJECT_OVERVIEW | open |
+| [Q-01](#q-01) | ★ | Folder layout, boundaries and table ownership in `apps/api` | RULES, ARCHITECTURE, CONVENTIONS | answered |
+| [Q-02](#q-02) | ★ | How contexts call each other | ARCHITECTURE, inventory, ledger, ordering, payment, reconciliation | answered |
+| [Q-03](#q-03) | ★ | API error format and status codes | RULES, CONVENTIONS, identity | answered |
+| [Q-04](#q-04) | ★ | `Idempotency-Key` behavior and storage | RULES, ARCHITECTURE, PROJECT_OVERVIEW, decisions/README, payment | answered |
+| [Q-05](#q-05) | ★ | Can one order hold products from several sellers? | GLOSSARY, product/EPICS, ordering, shipping | answered |
+| [Q-06](#q-06) | ★ | Roles, token lifetime, admin powers | PROJECT_OVERVIEW, GLOSSARY, product/EPICS, identity | answered |
+| [Q-07](#q-07) | ★ | Non-goals | PROJECT_OVERVIEW, CLAUDE.md | answered |
+| [Q-08](#q-08) | ★ | Branch names, commit format, PR flow | CONVENTIONS | answered |
+| [Q-09](#q-09) | ★ | Approve the build order; which module is first | PROJECT_OVERVIEW, CLAUDE.md, product/EPICS, catalog, start-spec skill | answered |
+| [Q-10](#q-10) | ★ | Lint, format and test tooling; test levels for "done" | CONVENTIONS, CLAUDE.md | answered |
+| [Q-11](#q-11) | | Seller eKYC: required before what? | GLOSSARY, product/EPICS, identity | answered |
+| [Q-12](#q-12) | | Currency and money storage | CONVENTIONS, GLOSSARY, product/EPICS, catalog, ledger | answered |
+| [Q-13](#q-13) | | What is a variant; where do price and stock live? | PROJECT_OVERVIEW, GLOSSARY, product/EPICS, catalog, inventory | answered |
+| [Q-14](#q-14) | | Stock reservation lifecycle and TTL | GLOSSARY, product/EPICS, inventory, ordering, invariant-test skill | answered |
+| [Q-15](#q-15) | | DB-level locking strategy for stock | product/EPICS, inventory | answered |
+| [Q-16](#q-16) | | Per-user rate limit values and algorithm | product/EPICS, inventory | answered |
+| [Q-17](#q-17) | | What exactly is a flash sale? | GLOSSARY, product/EPICS, inventory | answered |
+| [Q-18](#q-18) | | Ledger accounts | GLOSSARY, product/EPICS, ledger, invariant-test skill | answered |
+| [Q-19](#q-19) | | Marketplace fee rate and timing | GLOSSARY, product/EPICS, ledger | answered |
+| [Q-20](#q-20) | | Successful delivery, return window, withdrawal rules | GLOSSARY, product/EPICS, ledger | answered |
+| [Q-21](#q-21) | | Payment method → provider mapping | GLOSSARY, product/EPICS, payment | answered |
+| [Q-22](#q-22) | | Re-query schedule and payment timeout | GLOSSARY, product/EPICS, ordering, payment | answered |
+| [Q-23](#q-23) | | Refund flow and ledger entries | product/EPICS, ledger, payment | answered |
+| [Q-24](#q-24) | | Order states and transitions | ARCHITECTURE, GLOSSARY, product/EPICS, ordering, shipping | answered |
+| [Q-25](#q-25) | | Checkout saga steps and compensation | ARCHITECTURE, GLOSSARY, product/EPICS, ordering, payment | answered |
+| [Q-26](#q-26) | | Outbox with the first event, or later? | RULES, ARCHITECTURE, PROJECT_OVERVIEW, decisions/README | answered |
+| [Q-27](#q-27) | | Retries, DLQ, consumer deduplication | RULES, ARCHITECTURE, invoicing, ledger, notification | answered |
+| [Q-28](#q-28) | | Shipment event key and state machine | product/EPICS, ordering, shipping | answered |
+| [Q-29](#q-29) | | Which events notify whom, on which channel | ARCHITECTURE, product/EPICS, notification | answered |
+| [Q-30](#q-30) | | Who issues e-invoices, for what, and when | ARCHITECTURE, product/EPICS, invoicing | answered |
+| [Q-31](#q-31) | | Reconciliation sources and mismatch handling | ARCHITECTURE, GLOSSARY, product/EPICS, reconciliation | answered |
+| [Q-32](#q-32) | | Performance targets per capability | PROJECT_OVERVIEW | answered |
 | [Q-33](#q-33) | | `product` When does Seller money become available for Withdrawal? | — | merged into [Q-20](#q-20) |
-| [Q-34](#q-34) | | `product` Who decides a Refund for a Return, and how fast? | product/EPICS, payment | open |
-| [Q-35](#q-35) | | `product` Is cash on delivery (COD) in scope? | GLOSSARY, product/EPICS, ledger, payment, reconciliation | open |
-| [Q-36](#q-36) | | `product` Engagement and revenue features: in, later, or out? | GLOSSARY, product/EPICS | open |
-| [Q-37](#q-37) | | `product` After-sales exceptions: in scope, and which context owns them? | ARCHITECTURE, GLOSSARY, product/EPICS, ordering, shipping | open |
-| [Q-38](#q-38) | | `product` Is there a Seller handling step between payment and Shipment? | GLOSSARY, product/EPICS, ordering, shipping | open |
-| [Q-39](#q-39) | | `product` Vietnam compliance scope: Seller tax withholding, personal data | GLOSSARY, product/EPICS, identity, invoicing, ledger | open |
-| [Q-40](#q-40) | | `product` Bulk product import and multi-channel stock sync: in scope? | product/EPICS, catalog, inventory | open |
-| [Q-41](#q-41) | | `product` Admin back-office, audit trail and fraud tools: scope and home | ARCHITECTURE, GLOSSARY, product/EPICS, identity | open |
-| [Q-42](#q-42) | | `product` Reporting: Seller statement, Seller reports, finance reports | GLOSSARY, product/EPICS, ledger | open |
-| [Q-43](#q-43) | | Does checkout need a Shipping quote before payment? | ARCHITECTURE, PROJECT_OVERVIEW, product/EPICS, ordering, shipping | open |
-| [Q-44](#q-44) | | `product` Stuck-state detection: in scope, and where does it live? | product/EPICS | open |
-| [Q-45](#q-45) | | How do epics and enabling work become the plan? | PROJECT_OVERVIEW, docs/README, product/EPICS | open |
-| [Q-46](#q-46) | | In the flash-sale test, is underselling a failure? | inventory, invariant-test skill | open |
-| [Q-47](#q-47) | | `product` How does a Withdrawal move money to the Seller's bank? | ARCHITECTURE, product/EPICS, ledger | open |
-| [Q-48](#q-48) | | Which file owns the doc process? | docs/README | open |
+| [Q-34](#q-34) | | `product` Who decides a Refund for a Return, and how fast? | product/EPICS, payment | answered |
+| [Q-35](#q-35) | | `product` Is cash on delivery (COD) in scope? | GLOSSARY, product/EPICS, ledger, payment, reconciliation | answered |
+| [Q-36](#q-36) | | `product` Engagement and revenue features: in, later, or out? | GLOSSARY, product/EPICS | answered |
+| [Q-37](#q-37) | | `product` After-sales exceptions: in scope, and which context owns them? | ARCHITECTURE, GLOSSARY, product/EPICS, ordering, shipping | answered |
+| [Q-38](#q-38) | | `product` Is there a Seller handling step between payment and Shipment? | GLOSSARY, product/EPICS, ordering, shipping | answered |
+| [Q-39](#q-39) | | `product` Vietnam compliance scope: Seller tax withholding, personal data | GLOSSARY, product/EPICS, identity, invoicing, ledger | answered |
+| [Q-40](#q-40) | | `product` Bulk product import and multi-channel stock sync: in scope? | product/EPICS, catalog, inventory | answered |
+| [Q-41](#q-41) | | `product` Admin back-office, audit trail and fraud tools: scope and home | ARCHITECTURE, GLOSSARY, product/EPICS, identity | answered |
+| [Q-42](#q-42) | | `product` Reporting: Seller statement, Seller reports, finance reports | GLOSSARY, product/EPICS, ledger | answered |
+| [Q-43](#q-43) | | Does checkout need a Shipping quote before payment? | ARCHITECTURE, PROJECT_OVERVIEW, product/EPICS, ordering, shipping | answered |
+| [Q-44](#q-44) | | `product` Stuck-state detection: in scope, and where does it live? | product/EPICS | answered |
+| [Q-45](#q-45) | | How do epics and enabling work become the plan? | PROJECT_OVERVIEW, docs/README, product/EPICS | answered |
+| [Q-46](#q-46) | | In the flash-sale test, is underselling a failure? | inventory, invariant-test skill | answered |
+| [Q-47](#q-47) | | `product` How does a Withdrawal move money to the Seller's bank? | ARCHITECTURE, product/EPICS, ledger | answered |
+| [Q-48](#q-48) | | Which file owns the doc process? | docs/README | answered |
+| [Q-49](#q-49) | | How is "one money movement sums to 0" enforced? | ledger | answered |
+| [Q-50](#q-50) | | `product` Which context owns Product reviews and Seller ratings? | ARCHITECTURE, GLOSSARY, product/EPICS, catalog | answered |
+| [Q-51](#q-51) | | Where do ownership checks live? | identity | open |
 
 ---
 
@@ -77,7 +80,7 @@ The only place where undecided questions, their options and their analysis live.
 <a id="q-01"></a>
 ### Q-01: Folder layout, boundaries and table ownership in `apps/api` ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README says "modular monolith, split by bounded context" and plans to extract some contexts later ([R-ARCH-01](RULES_AND_CONSTRAINTS.md#r-arch-01)). Without clear boundaries, contexts read each other's tables. Then extraction becomes impossible, and the invariants can be broken from code outside Inventory or Ledger. This decides every file path, and every `related_code` entry.
 
@@ -91,12 +94,12 @@ The only place where undecided questions, their options and their analysis live.
 
 **Recommendation.** A. Both invariants depend on one owner per piece of data, so "only Inventory writes stock, only Ledger writes entries" must be enforced by a tool, not by memory. A also keeps rules in plain TypeScript, so unit tests run with no DB or NestJS. Keep the layers thin; do not add a layer that has nothing in it. A boundary lint rule needs a dependency, so it needs approval ([R-REPO-04](RULES_AND_CONSTRAINTS.md#r-repo-04)); for example `eslint-plugin-boundaries` or `dependency-cruiser` (unverified fit). **Would change it:** if you want the least structure while the domain model is still unclear, choose B, and plan a move to A before Payment and Ledger.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21). The boundary lint rule uses `eslint-plugin-boundaries`, approved as a dependency ([R-REPO-04](RULES_AND_CONSTRAINTS.md#r-repo-04)). Keep layers thin: no empty layer. Answer now lives in: [R-ARCH-02](RULES_AND_CONSTRAINTS.md#r-arch-02), [CONVENTIONS: Code layout](CONVENTIONS.md#code-layout), [ARCHITECTURE: Module boundaries](ARCHITECTURE.md#module-boundaries).
 
 <a id="q-02"></a>
 ### Q-02: How contexts call each other ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README diagram labels some arrows as events (`OrderPaid`, `Delivered`). The other four arrows have no label: Ordering → Inventory, Ordering → Payment, Payment → Ledger, Reconciliation → Ledger ([ARCHITECTURE: Data flow](ARCHITECTURE.md#data-flow)). This choice decides whether "reserve stock" and "write ledger entries" happen inside the same DB transaction as the caller's change. That matters for both invariants.
 
@@ -112,12 +115,12 @@ A related choice for A: can one DB transaction cover two contexts (for example t
 
 **Recommendation.** A. Allow a shared transaction only for Payment → Ledger, and record it in an ADR, because recording a payment without its ledger entries breaks R-LED-01. **Would change it:** an early plan to extract Payment or Ledger. Then choose events with an outbox ([Q-26](#q-26)).
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21). An unlabeled README arrow is an in-process call through the callee's public interface; a labeled arrow is an event. Only Payment → Ledger MAY share one DB transaction; an ADR records it. Answer now lives in: [R-ARCH-03](RULES_AND_CONSTRAINTS.md#r-arch-03), [ARCHITECTURE: Data flow](ARCHITECTURE.md#data-flow).
 
 <a id="q-03"></a>
 ### Q-03: API error format and status codes ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** Every endpoint, the generated client and the web app depend on one error format. Stock conflicts, idempotency conflicts and invalid state transitions each need an error code the client can read. The README says nothing about this.
 
@@ -133,12 +136,12 @@ Status codes to fix whichever option is chosen: validation 400, not signed in 40
 
 **Recommendation.** A, with a stable machine-readable `code` (for example `STOCK_NOT_ENOUGH`, `INVALID_TRANSITION`). Clients must tell "retry is safe" apart from "do not retry", and stable codes make that testable. **Would change it:** if the client generator cannot type Problem Details well, choose B with the same fields.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): RFC 9457 Problem Details with a stable `code` field, and the status codes listed above. Answer now lives in: [R-API-02](RULES_AND_CONSTRAINTS.md#r-api-02).
 
 <a id="q-04"></a>
 ### Q-04: `Idempotency-Key` behavior and storage ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-API-01](RULES_AND_CONSTRAINTS.md#r-api-01) is in the README, but not how it works. If the key check and the business write are not atomic, two parallel requests with the same key can both run, which means two orders and two stock reservations (risk to R-INV-01). The first write API needs this.
 
@@ -174,12 +177,12 @@ Recommendation for IPNs and webhooks: W2, replying to a repeat with the stored f
 
 **Recommendation.** A. Correctness matters more than speed here, and only the same DB transaction guarantees "one key, one effect" even after a crash. Redis MAY be added later as a fast first check, never as the only one. **Would change it:** none expected. If measurements show the table is a bottleneck, keep A and add the Redis check.
 
-**Decision:** _pending_
+**Decision:** A for storage, with the behavior table above, a TTL of 24 hours and the key scoped per user and endpoint; W2 for IPNs and carrier webhooks, replying to a repeat with the stored first reply (owner, 2026-11-21). Answer now lives in: [R-API-01](RULES_AND_CONSTRAINTS.md#r-api-01), [R-PAY-01](domain/payment.md#r-pay-01).
 
 <a id="q-05"></a>
 ### Q-05: Can one order hold products from several sellers? ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README says "multi-vendor" and "pays the seller after successful delivery". Shipping, the marketplace fee, paying the seller, and refunds all depend on how orders map to sellers. This shapes the first ERD, and changing it later means migrating money data (R-LED-01, R-LED-02).
 
@@ -193,12 +196,12 @@ Recommendation for IPNs and webhooks: W2, replying to a repeat with the stored f
 
 **Recommendation.** Model "each order belongs to exactly one seller" from day one. Build A first, and add B later as a parent record over orders. B then needs no change to the order, shipment or ledger model. Both invariants are easier to prove when each order has one seller. **Would change it:** if multi-seller checkout is a goal for the first demo, build B directly.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21). An Order MUST belong to exactly one Seller, and one checkout MUST cover the Products of one Seller only. One Order has one Payment and one Shipment. No parent checkout record is built now. Accepted cost: moving to B later means adding a parent record and re-pointing Payment from the Order to it; the owner treats that upgrade (partial failure, Compensation, partial Refund) as a later learning step. Answer now lives in: [R-ORD-04](domain/ordering.md#r-ord-04), [GLOSSARY](GLOSSARY.md), [PROJECT_OVERVIEW: Learning extensions](PROJECT_OVERVIEW.md#learning-extensions).
 
 <a id="q-06"></a>
 ### Q-06: Roles, token lifetime, admin powers ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README names buyers, sellers and admins, JWT, RBAC, and a later move to Keycloak. Identity is likely the first module ([Q-09](#q-09)). Rules for every other context depend on who may do what ([R-IDN-01](domain/identity.md#r-idn-01)).
 
@@ -216,12 +219,12 @@ Admin powers to list: approve sellers, approve withdrawals, see reconciliation r
 
 **Recommendation.** A. Revocable tokens matter once Withdrawals exist, and one account with many roles is what the RBAC in the README implies. **Would change it:** if Keycloak is moved earlier, use its tokens and skip the refresh-token table.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): one user MAY hold several roles (Buyer, Seller, Admin); access JWT about 15 minutes; refresh token stored in the DB and rotated on each use. Built at Build-order step 9. Where ownership checks live is split out to [Q-51](#q-51). Answer now lives in: [R-IDN-03](domain/identity.md#r-idn-03).
 
 <a id="q-07"></a>
 ### Q-07: Non-goals ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README lists no non-goals. Without them, AI sessions add features nobody asked for. A non-goal list also protects the main goal: correctness, not feature count.
 
@@ -234,12 +237,12 @@ Admin powers to list: approve sellers, approve withdrawals, see reconciliation r
 
 **Recommendation.** A. Each candidate is a guess and needs the owner's choice. Money-path candidates are decided in [Q-35](#q-35) and [Q-36](#q-36). **Would change it:** nothing; only the list contents are open.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21), as two lists. Non-goal: a production launch with real money. Outside the core, kept as learning extensions the owner MAY pick up after the core: native mobile apps; Seller storefront design; recommendation and search ranking; Buyer–Seller chat; livestream selling; sponsored placement; Seller subscriptions; more than one currency; a polished Admin UI and i18n; a real eKYC provider; multi-channel stock sync. Learning extensions that keep room in the model now: COD ([Q-35](#q-35)), Vouchers ([Q-36](#q-36)), several Sellers in one checkout ([Q-05](#q-05)). Answer now lives in: [PROJECT_OVERVIEW: Non-goals](PROJECT_OVERVIEW.md#non-goals), [PROJECT_OVERVIEW: Learning extensions](PROJECT_OVERVIEW.md#learning-extensions).
 
 <a id="q-08"></a>
 ### Q-08: Branch names, commit format, PR flow ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** Default branch is `main` (decided). Commits must link to `TM-xx` issues, so history explains why code changed. With one developer and AI sessions, a PR is also the place where CI checks R-TEST-01 before a merge.
 
@@ -253,12 +256,12 @@ Admin powers to list: approve sellers, approve withdrawals, see reconciliation r
 
 **Recommendation.** A, with Conventional Commits types (`feat`, `fix`, `docs`, `test`, `refactor`, `chore`) and the `TM-xx` ID in every PR title. Concurrency tests only protect the invariants if they run before code reaches `main`. **Would change it:** if CI does not exist yet, B is acceptable until TM-repo-setup adds CI.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21), with Conventional Commits types and branch names `<type>/tm-xx-<slug>`. AI pushes the branch and opens the PR; only the owner merges, on GitHub. Until CI exists (TM-repo-setup), work still goes through a PR, without automatic checks. Answer now lives in: [CONVENTIONS: Git](CONVENTIONS.md#git).
 
 <a id="q-09"></a>
 ### Q-09: Approve the build order; which module is first ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** The owner asked for work to follow module dependencies, not the README dates. The proposed graph is in [PROJECT_OVERVIEW: Build order](PROJECT_OVERVIEW.md#build-order). The ordering choices the README does NOT back are listed once, in the "Needs (not backed up)" column of that table. A Shipping quote at checkout would add one more ([Q-43](#q-43)).
 
@@ -274,12 +277,12 @@ Cross-cutting pieces: build ports with fakes with the first external system (Pay
 
 **Recommendation.** A. Building the Ledger before Payment means no money is ever recorded outside the double-entry ledger, which protects R-LED-01 from the first payment. Identity first is a convenience choice, because every other context needs users. Catalog can start right after it. **Would change it:** if an early demo of checkout matters more, use B, but keep Payment behind its fake until the Ledger exists.
 
-**Decision:** _pending_
+**Decision:** A variant of A, chosen for learning value (owner, 2026-11-21): Inventory first. Order: 0 Repo setup → 1 Inventory, on Catalog tables filled with seed data and an Identity stub → 2 Ledger → 3 Payment → 4 Ordering → 5 Events + Outbox → 6 Shipping, Notification → 7 Invoicing → 8 Reconciliation → 9 Identity (real) and the full Catalog → 10 Product reviews and Seller ratings. The Ledger MUST exist before Payment. Reason: the first module works on concurrency ([R-INV-01](domain/inventory.md#r-inv-01)) instead of auth setup and CRUD. Answer now lives in: [PROJECT_OVERVIEW: Build order](PROJECT_OVERVIEW.md#build-order).
 
 <a id="q-10"></a>
 ### Q-10: Lint, format and test tooling; test levels for "done" ★
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-TEST-01](RULES_AND_CONSTRAINTS.md#r-test-01) says a task is done only when tests and lint pass. The README names Jest, Testcontainers, WireMock, Playwright, k6 and Toxiproxy, but no lint or format tool. Every tool is a dependency, so the owner must approve it ([R-REPO-04](RULES_AND_CONSTRAINTS.md#r-repo-04)).
 
@@ -301,7 +304,7 @@ Cross-cutting pieces: build ports with fakes with the first external system (Pay
 
 **Recommendation.** A plus the test levels above, plus a type check. A fits best with the boundary lint rule recommended in Q-01. Tests named after rule IDs make `/audit-docs` able to find where each rule is enforced. **Would change it:** if Q-01 chooses `dependency-cruiser` for boundaries, B becomes equally good.
 
-**Decision:** _pending_
+**Decision:** A, plus a type check and the test levels above (owner, 2026-11-21). The owner approves these as dependencies ([R-REPO-04](RULES_AND_CONSTRAINTS.md#r-repo-04)): TypeScript, ESLint, Prettier, and the README test tools Jest, Testcontainers, WireMock, Playwright, k6 and Toxiproxy. ESLint plugins (for example a boundary rule, [Q-01](#q-01)) and any other package still need approval. Answer now lives in: [CONVENTIONS: Tooling](CONVENTIONS.md#tooling), [R-TEST-03](RULES_AND_CONSTRAINTS.md#r-test-03).
 
 ---
 
@@ -310,7 +313,7 @@ Cross-cutting pieces: build ports with fakes with the first external system (Pay
 <a id="q-11"></a>
 ### Q-11: Seller eKYC: required before what?
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README lists FPT.AI OCR for seller eKYC, but not when it is required. Money leaves the marketplace only through a Withdrawal, so eKYC is mostly a money-safety control.
 
@@ -324,14 +327,14 @@ Cross-cutting pieces: build ports with fakes with the first external system (Pay
 
 **Recommendation.** B. It protects the only path where money leaves, and it does not block early modules. Legal requirements in Vietnam for marketplace sellers are not checked (unverified). **Would change it:** a legal requirement to verify sellers before they sell.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21): eKYC is required before a Seller's first Withdrawal. In the core, eKYC goes through its port with the Fake implementation only; a real provider is a learning extension. Answer now lives in: [R-IDN-04](domain/identity.md#r-idn-04).
 
 ## Catalog
 
 <a id="q-12"></a>
 ### Q-12: Currency and money storage
 
-**Status:** open
+**Status:** answered
 
 **Context.** Prices, payments, fees and ledger entries all store money. A rounding error breaks R-LED-01 because entries would no longer sum to exactly 0. The README names VN providers and Stripe, but no currency.
 
@@ -345,12 +348,12 @@ Cross-cutting pieces: build ports with fakes with the first external system (Pay
 
 **Recommendation.** A. Integers make "sum of entries = 0" exact, and a currency column costs nothing now and avoids a migration if Stripe needs another currency later. Fees in percent must define one rounding rule ([Q-19](#q-19)). **Would change it:** a real need for more than one currency in the core.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21). Answer now lives in: [CONVENTIONS: Money](CONVENTIONS.md#money).
 
 <a id="q-13"></a>
 ### Q-13: What is a variant; where do price and stock live?
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README says "Products, variants, prices" for Catalog and "Stock" for Inventory. Where stock lives decides the row that R-INV-01 locks.
 
@@ -364,14 +367,14 @@ Cross-cutting pieces: build ports with fakes with the first external system (Pay
 
 **Recommendation.** A. One sellable unit with one stock row keeps the locking design in Q-15 simple and the same for every product. **Would change it:** a decision to keep the core very small (C).
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21). Answer now lives in: [R-CAT-01](domain/catalog.md#r-cat-01).
 
 ## Inventory
 
 <a id="q-14"></a>
 ### Q-14: Stock reservation lifecycle and TTL
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-INV-03](domain/inventory.md#r-inv-03) says reservations have a TTL. The README does not say when they start, how long they last, or what happens when payment arrives after expiry. This is where R-INV-01 meets external failures.
 
@@ -393,12 +396,12 @@ Cross-cutting pieces: build ports with fakes with the first external system (Pay
 
 **Recommendation.** B with the details above. Reserving at checkout is the smallest window that still guarantees stock to a buyer who pays in time. The late-payment rule closes the main hole between R-INV-01 and external delays. **Would change it:** if flash sales are the main case, keep B but give each flash sale its own short TTL ([Q-17](#q-17)).
 
-**Decision:** _pending_
+**Decision:** B with the details above (owner, 2026-11-21). The TTL value follows the payment window decided in [Q-22](#q-22). Answer now lives in: [R-INV-05](domain/inventory.md#r-inv-05).
 
 <a id="q-15"></a>
 ### Q-15: DB-level locking strategy for stock
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-INV-02](domain/inventory.md#r-inv-02) says the DB stops overselling. The README metric is 50 concurrent requests on stock 10 → oversold 0.
 
@@ -415,12 +418,12 @@ In every option, add a DB `CHECK (available >= 0)` constraint as a second guard.
 
 **Recommendation.** B plus the CHECK constraint. It is the simplest option that is correct by construction, and it is easy to prove with the README concurrency test. Add D only as a filter in front of B, and only when a measurement shows the hot row is a bottleneck. **Would change it:** a measured lock-contention problem that B cannot handle.
 
-**Decision:** _pending_
+**Decision:** B plus the `CHECK` constraint (owner, 2026-11-21). As a learning lab ([L-16](LEARNING_MODE.md#l-16)), the owner MAY build A, B and C side by side and measure them with the concurrency test; B is what ships. D only as a filter in front of B, after a measurement shows the need. Answer now lives in: [R-INV-02](domain/inventory.md#r-inv-02).
 
 <a id="q-16"></a>
 ### Q-16: Per-user rate limit values and algorithm
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-INV-04](domain/inventory.md#r-inv-04) requires per-user rate limiting in flash sales. It protects capacity and fairness, not the invariant.
 
@@ -434,12 +437,12 @@ In every option, add a DB `CHECK (available >= 0)` constraint as a second guard.
 
 **Recommendation.** B in Redis. Set the numbers (for example requests per user per flash sale per minute) after a k6 load test, not before. If Redis is down, the system SHOULD still serve requests, because the DB still protects R-INV-01. **Would change it:** nothing in the algorithm; the values wait for measurement.
 
-**Decision:** _pending_
+**Decision:** B in Redis (owner, 2026-11-21): token bucket per user per Flash sale. Values are set after a k6 load test. If Redis is down, requests are still served (fail-open), because the DB protects R-INV-01. Answer now lives in: [R-INV-04](domain/inventory.md#r-inv-04).
 
 <a id="q-17"></a>
 ### Q-17: What exactly is a flash sale?
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README names flash sales as the main overselling risk but does not define them.
 
@@ -452,14 +455,14 @@ In every option, add a DB `CHECK (available >= 0)` constraint as a second guard.
 
 **Recommendation.** A. A separate stock pool makes the concurrency test match the README example exactly (stock 10, 50 buyers), and keeps a sale from blocking normal orders. **Would change it:** if flash sales are only a load-test scenario and not a product feature, use B.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): time window, special Price, its own Stock pool and a per-user quantity cap. Answer now lives in: [R-INV-06](domain/inventory.md#r-inv-06).
 
 ## Ledger
 
 <a id="q-18"></a>
 ### Q-18: Ledger accounts
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README lists seller wallets, marketplace fees and withdrawals, and says the marketplace holds the money until delivery. A double-entry ledger needs a fixed list of account types to post against (R-LED-01, R-LED-03).
 
@@ -475,12 +478,12 @@ Also decide: every money movement is one group of entries that sums to 0 itself,
 
 **Recommendation.** A. It is the smallest set that makes R-LED-01 and R-LED-03 checkable: "available" money can only come from "pending" after successful delivery ([Q-20](#q-20)). **Would change it:** cash on delivery ([Q-35](#q-35)) or Vouchers ([Q-36](#q-36)) being in scope, which need more accounts.
 
-**Decision:** _pending_
+**Decision:** A, with Ledger accounts kept as data (owner, 2026-11-21). A Ledger account is identified by its account type, its Account holder and its currency, so a new account type or holder type (for example a Carrier for COD) is new data, never a change to existing Ledger entries. How "each money movement sums to 0" is enforced is not decided: [Q-49](#q-49). Answer now lives in: [R-LED-04](domain/ledger.md#r-led-04).
 
 <a id="q-19"></a>
 ### Q-19: Marketplace fee rate and timing
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README says the marketplace "deducts its fee" but gives no rate or timing.
 
@@ -496,12 +499,12 @@ Timing: take the fee when money moves from pending to available (on delivery), o
 
 **Recommendation.** A, taken at delivery, with one rounding rule. Storing the rate on the order makes past fees reproducible during reconciliation. Taking it at delivery means a refunded order before delivery needs no fee reversal. The rate value is the owner's choice. **Would change it:** a product need for category pricing.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): one rate for all Orders, **5%**, copied onto the Order when it is placed and taken at successful delivery; rounded down to a whole VND. Answer now lives in: [R-LED-05](domain/ledger.md#r-led-05).
 
 <a id="q-20"></a>
 ### Q-20: Successful delivery, return window, withdrawal rules
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-LED-03](domain/ledger.md#r-led-03) pays the seller after successful delivery. The README does not define "successful", returns, or how sellers withdraw.
 
@@ -521,14 +524,14 @@ Withdrawal rules to set: minimum amount, admin approval or automatic, how often,
 
 **Recommendation.** B with N as a setting, and withdrawals approved by an admin in the core. Show the release date per Order to Sellers so the wait is predictable (from Q-33). Money that cannot be taken back must not become available early. **Would change it:** returns being out of scope ([Q-37](#q-37)), which makes A enough; evidence that Sellers will not join with B (then D).
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21): money becomes available N days after `Delivered`, with **N = 7** as a setting; every Withdrawal needs Admin approval; Sellers see the release date per Order. Answer now lives in: [R-LED-03](domain/ledger.md#r-led-03), [R-LED-06](domain/ledger.md#r-led-06).
 
 ## Payment
 
 <a id="q-21"></a>
 ### Q-21: Payment method → provider mapping
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README says buyers pay "via VNPay / QR bank transfer / card", and lists VNPay, SePay and Stripe as providers. It does not map methods to providers.
 
@@ -541,12 +544,12 @@ Withdrawal rules to set: minimum amount, admin approval or automatic, how often,
 
 **Recommendation.** B first, with the port shaped so A can follow. Design the port from what all three share (create payment, receive IPN, query status, refund), and prove it with the fake before adding a second provider. **Would change it:** a demo that needs card payments early.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21): VNPay only in the core; the port is shaped from what VNPay, SePay and Stripe share (create payment, receive IPN, query status, refund). SePay and Stripe are learning extensions. Answer now lives in: [R-PAY-03](domain/payment.md#r-pay-03).
 
 <a id="q-22"></a>
 ### Q-22: Re-query schedule and payment timeout
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-PAY-02](domain/payment.md#r-pay-02) says to re-query when the IPN does not arrive. The README does not say when, how often, or when to give up. This decides how long stock stays reserved ([Q-14](#q-14)).
 
@@ -562,12 +565,12 @@ After the window ends with no result: mark the payment failed, release the reser
 
 **Recommendation.** C. The job alone already meets R-PAY-02; the return-URL check only makes it faster. **Would change it:** if gateway rate limits are tight, use A only.
 
-**Decision:** _pending_
+**Decision:** C (owner, 2026-11-21): a check when the Buyer comes back to the return URL, plus a job as the safety net. Payment window **15 minutes**; the job re-queries pending payments every 5 minutes until the window ends, then once more and closes the payment. The Stock reservation TTL is **20 minutes**. Answer now lives in: [R-PAY-02](domain/payment.md#r-pay-02), [R-INV-05](domain/inventory.md#r-inv-05).
 
 <a id="q-23"></a>
 ### Q-23: Refund flow and ledger entries
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README lists refunds under Payment. A refund moves money back, so it needs ledger entries (R-LED-01, R-LED-02). Late payment after reservation expiry ([Q-14](#q-14)) may also need an automatic refund.
 
@@ -582,14 +585,14 @@ Every refund: a new set of reversing ledger entries, never an edit. The gateway 
 
 **Recommendation.** A first. It covers the system-triggered case (late payment) and the most common admin case, with no negative wallets. **Would change it:** returns being in scope ([Q-37](#q-37)).
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): full Refunds only, and only before the Seller's money is available. Partial Refunds are a learning extension. Answer now lives in: [R-PAY-04](domain/payment.md#r-pay-04).
 
 ## Ordering
 
 <a id="q-24"></a>
 ### Q-24: Order states and transitions
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-ORD-01](domain/ordering.md#r-ord-01) requires a state machine. The README mentions only "awaiting payment", "in transit" and "delivered", and says a "delivered" order must not go back to "in transit". The README draws no Shipping → Ordering arrow, so whether carrier statuses change the Order state at all is part of this question. Name clash: `Delivered` is also the Shipping event name; if the Order keeps a state with the same name, the GLOSSARY must tell them apart.
 
@@ -604,12 +607,12 @@ The state names above are examples, not decisions.
 
 **Recommendation.** B. Carrier statuses are noisy and arrive out of order ([R-SHP-01](domain/shipping.md#r-shp-01)). Keeping them in Shipping means Ordering sees only clean events such as `Delivered`, which R-LED-03 depends on. **Would change it:** a wish for the smallest model in the first version (A).
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21): separate state machines for the Order, the Payment and the Shipment. The Order keeps business states only and changes on their events; Carrier statuses stay in Shipping. Exact Order state names are fixed in the Ordering spec. Answer now lives in: [R-ORD-01](domain/ordering.md#r-ord-01).
 
 <a id="q-25"></a>
 ### Q-25: Checkout saga steps and compensation
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README says Ordering orchestrates the checkout saga with compensation ([R-ORD-02](domain/ordering.md#r-ord-02)). Steps and compensations are not listed. An IPN for a closed order also needs a rule.
 
@@ -625,14 +628,14 @@ Proposed steps for A or B (proposal only): place order → reserve stock → cre
 
 **Recommendation.** A. One developer, one source of truth, and every step is idempotent and can resume after a crash. **Would change it:** sagas beyond checkout (returns, withdrawals) that would reuse B.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): the Order row and its state machine are the saga state; a job resumes Orders stuck in a step. Answer now lives in: [R-ORD-02](domain/ordering.md#r-ord-02).
 
 ## Events
 
 <a id="q-26"></a>
 ### Q-26: Outbox with the first event, or later?
 
-**Status:** open
+**Status:** answered
 
 **Question.** Build the Transactional Outbox together with the first cross-context event, or publish directly first and add the Outbox later?
 
@@ -648,12 +651,12 @@ Proposed steps for A or B (proposal only): place order → reserve stock → cre
 
 **Recommendation.** A. The relay is small (poll the table, publish, mark sent), and the failure it prevents is one of the six listed in the README. Retrofitting later touches every publisher. **Would change it:** if the first event has no effect on money or stock (for example a notification only), B is acceptable for that event alone.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): the Transactional Outbox is built with the first cross-context event. Answer now lives in: [R-EVT-01](RULES_AND_CONSTRAINTS.md#r-evt-01).
 
 <a id="q-27"></a>
 ### Q-27: Retries, DLQ, consumer deduplication
 
-**Status:** open
+**Status:** answered
 
 **Context.** An Outbox delivers events at least once (unverified wording; standard for this pattern), so consumers will see repeats. The README mentions "message queue + DLQ" in its roadmap and deduplication only for carrier events. A repeated `Delivered` could pay a Seller twice.
 
@@ -670,14 +673,14 @@ Retries: N attempts with backoff, then the DLQ. DLQ messages are replayed by han
 
 **Recommendation.** A for handlers that touch money or stock, B allowed for notifications. The inbox makes "one event, one effect" testable in the same way for every money handler. **Would change it:** nothing expected; retry counts wait for measurement.
 
-**Decision:** _pending_
+**Decision:** A for handlers that touch money, Stock or e-invoices; B allowed for notifications (owner, 2026-11-21). Retry counts wait for measurement. Answer now lives in: [R-EVT-02](RULES_AND_CONSTRAINTS.md#r-evt-02).
 
 ## Shipping
 
 <a id="q-28"></a>
 ### Q-28: Shipment event key and state machine
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-SHP-01](domain/shipping.md#r-shp-01) deduplicates carrier updates by an event key. The README does not define the key, or the statuses.
 
@@ -693,14 +696,14 @@ Out-of-order updates: a transition table is the authority. A move back is reject
 
 **Recommendation.** C, with a shipment state machine in Shipping (see [Q-24](#q-24) option B). **Would change it:** both carriers sending a reliable event ID (then A only).
 
-**Decision:** _pending_
+**Decision:** C (owner, 2026-11-21), with a Shipment state machine in Shipping. Answer now lives in: [R-SHP-01](domain/shipping.md#r-shp-01).
 
 ## Notification
 
 <a id="q-29"></a>
 ### Q-29: Which events notify whom, on which channel
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README lists email, SMS and push providers and the `OrderPaid` arrow, but no notification list.
 
@@ -713,14 +716,14 @@ Out-of-order updates: a transition table is the authority. A move back is reject
 
 **Recommendation.** A. Notifications do not affect the invariants, so they can stay small while the core is built. **Would change it:** a demo that needs SMS or push.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): email only, through the Fake implementation in tests. Buyer: Order paid, Order delivered. Seller: new paid Order. SMS and push are learning extensions. Answer now lives in: [R-NTF-03](domain/notification.md#r-ntf-03).
 
 ## Invoicing
 
 <a id="q-30"></a>
 ### Q-30: Who issues e-invoices, for what, and when
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README says Invoicing issues, adjusts and replaces e-invoices through SePay eInvoice, triggered by `Delivered`. It does not say who the seller of record is. This is a legal question under Vietnamese e-invoice rules (unverified; get qualified advice).
 
@@ -734,14 +737,14 @@ Out-of-order updates: a transition table is the authority. A move back is reject
 
 **Recommendation.** A for the core, pending legal advice. It invoices only money the marketplace earns, which the ledger already records. **Would change it:** advice that the marketplace must issue buyer invoices.
 
-**Decision:** _pending_
+**Decision:** A for the core (owner, 2026-11-21), pending legal advice (unverified): the marketplace issues an e-invoice to the Seller for the Marketplace fee only. Answer now lives in: [R-INVC-02](domain/invoicing.md#r-invc-02).
 
 ## Reconciliation
 
 <a id="q-31"></a>
 ### Q-31: Reconciliation sources and mismatch handling
 
-**Status:** open
+**Status:** answered
 
 **Context.** [R-REC-01](domain/reconciliation.md#r-rec-01) requires a nightly job (README, The problem). The README contradicts itself on sources: its context table names payment gateways, banks and shipping carriers; its diagram shows only payment gateways (`REC <-- file / API --> VNP`), and its integrations list names no bank provider. It also does not say which data from carriers (shipping fees? cash on delivery, [Q-35](#q-35)?) or what happens on a mismatch.
 
@@ -766,14 +769,14 @@ Schedule: nightly (README). Exact time: a fixed time at night, Vietnam time (Asi
 
 **Recommendation.** A. A mismatch usually means a bug, and an automatic fix would hide it. Corrections as new entries keep R-LED-02. **Would change it:** a large number of known, harmless mismatch types after months of data.
 
-**Decision:** _pending_
+**Decision:** S1 + A (owner, 2026-11-21): Payment gateways only; a mismatch is reported, and a person fixes it with correcting Ledger entries; nothing is corrected automatically. Answer now lives in: [R-REC-02](domain/reconciliation.md#r-rec-02).
 
 ## Measurement
 
 <a id="q-32"></a>
 ### Q-32: Performance targets per capability
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README states one target (p99 < 200ms at 2,000 RPS, in the load and observability capability group) and a Metrics table with "Before / After" columns. [R-TEST-02](RULES_AND_CONSTRAINTS.md#r-test-02) requires every number to be measured.
 
@@ -788,7 +791,7 @@ Correctness targets are already fixed by the README: oversold = 0, IPN recorded 
 
 **Recommendation.** A for speed; the correctness targets apply from the first test. **Would change it:** nothing expected.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): build a baseline script per capability first, then set targets. Correctness targets apply from the first test. Answer now lives in: [PROJECT_OVERVIEW: Goal](PROJECT_OVERVIEW.md#goal).
 
 ## Product
 
@@ -816,7 +819,7 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 <a id="q-34"></a>
 ### Q-34: Who decides a Refund for a Return, and how fast?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** Buyers want a Refund in a few taps, back to the original payment method, on a clear deadline. Sellers say automatic Refunds without the Products coming back are where they lose money, and want time to respond with evidence. The Admin team wants automatic Refunds only below a threshold. [Q-23](#q-23) covers the Refund flow and ledger entries; this question decides who makes the decision. Epics: [EP-17](product/EPICS.md#ep-17), [EP-18](product/EPICS.md#ep-18).
 
@@ -830,12 +833,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** A. It needs no fraud scoring and fits a small team. **Would change it:** the Admin team cannot handle the volume of contested cases.
 
-**Decision:** _pending_
+**Decision:** Later (owner, 2026-11-21): Returns are a learning extension ([Q-37](#q-37)), so who decides a Refund for a Return is decided when Returns come into scope. Answer now lives in: [PROJECT_OVERVIEW: Learning extensions](PROJECT_OVERVIEW.md#learning-extensions).
 
 <a id="q-35"></a>
 ### Q-35: Is cash on delivery (COD) in scope?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** The Buyer perspective rates COD a must: many Buyers will not pay first to an unknown Seller (unverified). The README lists only VNPay, QR bank transfer and card, and says the marketplace holds the money. With COD the Carrier holds the money first and sends it to the marketplace later. That adds new ledger accounts, a new Reconciliation source (Carrier money) and a new failure case (Buyer refuses the Products). [Q-07](#q-07) links here for COD. Epic: [EP-22](product/EPICS.md#ep-22).
 
@@ -849,12 +852,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** B. Adding a new money holder after the ledger accounts are fixed is costly; reserving room for it now is cheap. **Would change it:** the owner wants the project to model the Vietnamese market closely (then C), or wants the smallest scope (then A).
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21). COD is not built in the core. Ledger accounts MUST be able to hold money owed by a Carrier without changing existing Ledger entries ([R-LED-04](domain/ledger.md#r-led-04)). Known later change, accepted: with COD the Shipment happens before the money arrives, so the Order state machine ([Q-24](#q-24)) changes then. Answer now lives in: [PROJECT_OVERVIEW: Learning extensions](PROJECT_OVERVIEW.md#learning-extensions), [R-LED-04](domain/ledger.md#r-led-04).
 
 <a id="q-36"></a>
 ### Q-36: Engagement and revenue features: in, later, or out?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** Buyers expect vouchers and reviews; Sellers want Seller-funded vouchers; the business strategist lists subscription tiers and sponsored placement as revenue. The business analyst and the strategist push back on vouchers before the Ledger is proven, because every voucher splits money across more ledger entries. The strategist also pushes back on chat and livestream selling early. [Q-07](#q-07) links here for these candidates. Epics: [EP-25](product/EPICS.md#ep-25), [EP-29](product/EPICS.md#ep-29), [EP-30](product/EPICS.md#ep-30), [EP-31](product/EPICS.md#ep-31).
 
@@ -868,12 +871,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** B. Reviews and ratings do not touch money; vouchers and paid tiers do. **Would change it:** a goal to demonstrate Voucher accounting, which is a strong ledger showcase.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21). Product reviews and Seller ratings are in the core. They are not a learning point, so AI MAY write them in full. Vouchers come later, as a learning extension after the Ledger is proven. Seller subscriptions, sponsored placement, chat and livestream are learning extensions outside the core. Which context owns reviews: [Q-50](#q-50). Answer now lives in: [PROJECT_OVERVIEW: Non-goals](PROJECT_OVERVIEW.md#non-goals), [PROJECT_OVERVIEW: Build order](PROJECT_OVERVIEW.md#build-order), [GLOSSARY](GLOSSARY.md).
 
 <a id="q-37"></a>
 ### Q-37: After-sales exceptions: in scope, and which context owns them?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** Every perspective raised failed delivery, Return after delivery and Disputes between Buyer and Seller. The README covers Refunds (Payment) and Compensation in the Checkout saga, but no context owns a case that spans Shipping, Payment, Ledger and Inventory after the Order is paid. Epics: [EP-16](product/EPICS.md#ep-16), [EP-17](product/EPICS.md#ep-17), [EP-18](product/EPICS.md#ep-18).
 
@@ -887,12 +890,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** Decide scope first (C or not), then the home. If Returns are in, B, because a Return can last weeks after the Order has finished checkout. **Would change it:** the owner prefers to keep the README's 10 contexts unchanged (then A).
 
-**Decision:** _pending_
+**Decision:** C (owner, 2026-11-21): only failed delivery and return to sender are in the core, owned by Shipping. Returns and Disputes are learning extensions. Answer now lives in: [R-SHP-03](domain/shipping.md#r-shp-03), [PROJECT_OVERVIEW: Learning extensions](PROJECT_OVERVIEW.md#learning-extensions).
 
 <a id="q-38"></a>
 ### Q-38: Is there a Seller handling step between payment and Shipment?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** The README goes from `OrderPaid` straight to Shipping. In practice a Seller confirms, packs and hands Products to the Carrier, or cancels when Products are missing. Sellers need bulk handling and shipping labels. The business analyst notes that no context owns this step, so Orders can get stuck after payment. Epic: [EP-15](product/EPICS.md#ep-15).
 
@@ -905,12 +908,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** B. A Seller cancel after payment happens in real marketplaces, and it is a strong test of Compensation. **Would change it:** a wish to match the README flow exactly.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21): after payment, the Order waits for the Seller to confirm before a Shipment is created, with a deadline; a Seller cancel runs Compensation. The deadline value is fixed in the Ordering spec. Answer now lives in: [R-ORD-05](domain/ordering.md#r-ord-05).
 
 <a id="q-39"></a>
 ### Q-39: Vietnam compliance scope: Seller tax withholding, personal data
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** The business strategist and the business analyst report that Vietnamese rules may require marketplaces to withhold and declare tax for household Sellers, and that personal data rules apply to Buyer data shown to Sellers (unverified, both). Tax withholding changes the ledger accounts ([Q-18](#q-18)) and e-invoices ([Q-30](#q-30)). Data retention for accounting records may conflict with deletion requests (unverified). Epics: [EP-23](product/EPICS.md#ep-23), [EP-24](product/EPICS.md#ep-24).
 
@@ -924,12 +927,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** B. Data masking is cheap if designed early; withholding mainly needs room in the ledger accounts. **Would change it:** a checked legal source that makes withholding central to how Seller money is split.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21): personal data protection is built (Buyer data shown to Sellers is masked); Seller tax withholding is designed for (room in the Ledger accounts, [R-LED-04](domain/ledger.md#r-led-04)) and built later. Answer now lives in: [R-IDN-05](domain/identity.md#r-idn-05), [PROJECT_OVERVIEW: Learning extensions](PROJECT_OVERVIEW.md#learning-extensions).
 
 <a id="q-40"></a>
 ### Q-40: Bulk product import and multi-channel stock sync: in scope?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** Sellers who sell on several marketplaces want bulk import of Products and an API to keep Stock in sync. Stock sync lets an external system change Stock, which adds a new write path next to Stock reservations. [R-INV-01](domain/inventory.md#r-inv-01) protects only TallyMart's own Stock. Epics: [EP-27](product/EPICS.md#ep-27), [EP-28](product/EPICS.md#ep-28).
 
@@ -943,12 +946,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** B. Bulk import is high value with low risk. A sync API should wait until the locking strategy ([Q-15](#q-15)) is proven under load. **Would change it:** a wish to test Stock correctness against an external writer.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21): bulk import of Products, Prices and Stock is in, with the full Catalog at Build-order step 9; multi-channel stock sync is a learning extension. Answer now lives in: [domain/catalog.md](domain/catalog.md), [PROJECT_OVERVIEW: Learning extensions](PROJECT_OVERVIEW.md#learning-extensions).
 
 <a id="q-41"></a>
 ### Q-41: Admin back-office, audit trail and fraud tools: scope and home
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** The Admin team and the business analyst both rate a back-office a must: one timeline per Order, queues for stuck Orders and Reconciliation mismatches, manual corrections made only as new ledger entries, a second Admin approving large amounts, and an audit trail of every Admin action. Fraud signals and Seller penalties were rated lower. Admin powers are part of [Q-06](#q-06). Stuck-state detection (EP-21) overlaps the queues: [Q-44](#q-44). The audit trail is cross-cutting and has no owner in the README. Epics: [EP-19](product/EPICS.md#ep-19), [EP-26](product/EPICS.md#ep-26).
 
@@ -962,12 +965,12 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** A, with fraud tools later. Keeping Admin actions inside the owning context keeps "only Ledger writes ledger entries" true. **Would change it:** nothing expected.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): each context exposes its own Admin actions and records them in one shared Audit trail format; fraud tools are a learning extension. Answer now lives in: [R-ARCH-04](RULES_AND_CONSTRAINTS.md#r-arch-04).
 
 <a id="q-42"></a>
 ### Q-42: Reporting: Seller statement, Seller reports, finance reports
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** Sellers, the business analyst and the business strategist all rate a Seller statement (every ledger entry per Order: payment, Marketplace fee, Refund, shipping) a must; the strategist calls it the main differentiator. Sellers also want sales reports; finance wants a daily close report. The Ledger holds the data, but the README gives no context the job of reporting. Epic: [EP-20](product/EPICS.md#ep-20).
 
@@ -981,7 +984,7 @@ These questions come from product discovery on 2026-11-15. Each one decides the 
 
 **Recommendation.** A first. It proves the ledger to Sellers with the least work; B can follow when the read model is built for other reasons. **Would change it:** nothing expected.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): a Seller statement only, served by the Ledger as a read view per Seller wallet. Answer now lives in: [domain/ledger.md](domain/ledger.md).
 
 ## Raised by the consistency review (2026-11-16)
 
@@ -990,7 +993,7 @@ These questions come from the docs consistency review (`.claude/reviews/consiste
 <a id="q-43"></a>
 ### Q-43: Does checkout need a Shipping quote before payment?
 
-**Status:** open
+**Status:** answered
 
 **Context.** EP-06 (Checkout) needs "a Shipping quote from EP-10", and EP-10 (Shipping) needs EP-06's `OrderPaid`, so the epics form a loop. The README gives Shipping "multi-carrier quotes" but draws no Ordering → Shipping arrow before `OrderPaid`. The Build order puts Ordering (step 6) before Shipping (step 8). Epics: [EP-06](product/EPICS.md#ep-06), [EP-10](product/EPICS.md#ep-10).
 
@@ -1004,12 +1007,12 @@ These questions come from the docs consistency review (`.claude/reviews/consiste
 
 **Recommendation.** A. The README gives quotes to Shipping, and splitting EP-10 removes the loop without moving the rest of the Build order. **Would change it:** if the first demo can live with a flat fee, B, and add A later.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21), against the recommendation: a flat Shipping fee, set as a setting and stored on the Order; Carrier quotes are a learning extension. This removes the EP-06 ↔ EP-10 loop without changing the Build order. Answer now lives in: [R-ORD-06](domain/ordering.md#r-ord-06).
 
 <a id="q-44"></a>
 ### Q-44: Stuck-state detection: in scope, and where does it live?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** EP-21 detects Orders paid with no Shipment, Shipments with no update, missing IPNs, a growing DLQ and failed e-invoices. It was labelled "README (observability)", but the README's observability group lists OpenTelemetry, SLOs and load tests, not stuck-state detection. It cited [Q-32](#q-32) (performance targets), which does not ask this. Its queues overlap EP-19's "queues for stuck Orders" ([Q-41](#q-41)). Epic: [EP-21](product/EPICS.md#ep-21).
 
@@ -1023,12 +1026,12 @@ These questions come from the docs consistency review (`.claude/reviews/consiste
 
 **Recommendation.** A for alerts; queues follow [Q-41](#q-41). **Would change it:** if the back-office is in the core, B.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): metrics and alerts on stuck states, built with the observability capability group; no work queue. Answer now lives in: [ARCHITECTURE: Cross-cutting mechanisms](ARCHITECTURE.md#cross-cutting-mechanisms).
 
 <a id="q-45"></a>
 ### Q-45: How do epics and enabling work become the plan?
 
-**Status:** open
+**Status:** answered
 
 **Context.** [product/EPICS.md](product/EPICS.md) says only epics whose Decision is `accepted` or `changed` go into the plan. No epic covers Build-order step 0 (repo setup, ports with fakes, `Idempotency-Key`) or step 7 (Events + Outbox), so that work could never enter the plan ([PROJECT_OVERVIEW: Build order](PROJECT_OVERVIEW.md#build-order)). The allowed epic Decision values are defined nowhere in [docs/README](README.md). Closing a question never updates an epic's Scope. `docs/product/` has no row in the CLAUDE.md routing table.
 
@@ -1041,12 +1044,12 @@ These questions come from the docs consistency review (`.claude/reviews/consiste
 
 **Recommendation.** A. **Would change it:** if the sprint plan is meant to follow modules, not features, B.
 
-**Decision:** _pending_
+**Decision:** B (owner, 2026-11-21). The Build order is the plan: work follows its steps. Epics are a catalog of scope, mapped onto Build-order steps. No enabling epic is added. Answer now lives in: [PROJECT_OVERVIEW: Build order](PROJECT_OVERVIEW.md#build-order), [product/EPICS](product/EPICS.md#how-to-use-this-file).
 
 <a id="q-46"></a>
 ### Q-46: In the flash-sale test, is underselling a failure?
 
-**Status:** open
+**Status:** answered
 
 **Context.** The README Metrics row is "Flash sale: 50 concurrent requests, stock of 10 → oversold: 0". The domain doc and the `/invariant-test` skill said "exactly 10 succeed", which also forbids selling fewer than 10 (underselling). The README does not require that. "Exactly 10" also assumes one unit per request, no per-user cap ([Q-17](#q-17)) and no rate limit ([Q-16](#q-16)).
 
@@ -1059,12 +1062,12 @@ These questions come from the docs consistency review (`.claude/reviews/consiste
 
 **Recommendation.** B as a test condition only; R-INV-01 stays "never more than the stock". **Would change it:** nothing expected.
 
-**Decision:** _pending_
+**Decision:** B as a test condition only (owner, 2026-11-21); R-INV-01 stays "never more than the Stock". Answer now lives in: [R-INV-01](domain/inventory.md#r-inv-01).
 
 <a id="q-47"></a>
 ### Q-47: How does a Withdrawal move money to the Seller's bank?
 
-**Status:** open · **Tags:** `product`
+**Status:** answered · **Tags:** `product`
 
 **Context.** EP-09 moves available money "to a verified bank account" and handles "reversal of a failed bank transfer". The README lists Withdrawals under Ledger but names no outgoing bank transfer provider, port or context ([README: External integrations](../README.md#external-integrations)). Epic: [EP-09](product/EPICS.md#ep-09).
 
@@ -1078,12 +1081,12 @@ These questions come from the docs consistency review (`.claude/reviews/consiste
 
 **Recommendation.** A or C until a provider is chosen. **Would change it:** a provider with an outgoing-transfer sandbox.
 
-**Decision:** _pending_
+**Decision:** A (owner, 2026-11-21): an outgoing bank transfer port with the Fake implementation only. Answer now lives in: [R-LED-06](domain/ledger.md#r-led-06).
 
 <a id="q-48"></a>
 ### Q-48: Which file owns the doc process?
 
-**Status:** open
+**Status:** answered
 
 **Context.** [docs/README](README.md), [CLAUDE.md](../CLAUDE.md) and the skills in `.claude/skills/` describe parts of the same process differently. `last_verified` while no code exists: `/end-session` forbids the update, but CLAUDE.md and docs/README require it. Recurring AI mistakes: CLAUDE.md says "add", `/end-session` says "propose, then add after the owner agrees". ADR status: docs/README has `deprecated` and `decision_status`; `/propose-adr` and decisions/README use `superseded` and `draft`/`active`. `/start-spec` uses an undefined `R-<AREA>-NEW` placeholder, and the spec template invites pending questions that `/start-spec` forbids.
 
@@ -1095,5 +1098,62 @@ These questions come from the docs consistency review (`.claude/reviews/consiste
 | B. Each skill owns its own step | docs/README describes only formats | Skills stay self-contained | The same rule in many places drifts again | Low | None |
 
 **Recommendation.** A. **Would change it:** nothing expected.
+
+**Decision:** A (owner, 2026-11-21). docs/README owns the doc process; CLAUDE.md and the skills link to it. The five conflicts are settled as follows: `last_verified` MAY be set while no code exists, after checking against the README and the brief; a line for CLAUDE.md "Recurring AI mistakes" is proposed by AI and added only after the owner agrees; an ADR file uses `decision_status` `proposed` → `accepted` (or `rejected`), and "superseded" is shown only in the decisions index; `R-<AREA>-NEW` MAY appear only in a spec draft; the spec template links to questions instead of holding them. Answer now lives in: [docs/README](README.md).
+
+## Raised by closing questions (2026-11-21)
+
+<a id="q-49"></a>
+### Q-49: How is "one money movement sums to 0" enforced?
+
+**Status:** answered
+
+**Context.** [Q-18](#q-18) fixed the Ledger accounts but left open how each group of Ledger entries for one money movement is checked. [R-LED-01](domain/ledger.md#r-led-01) holds for the whole Ledger only if every group sums to 0 when it is written. Needed before the Ledger step of the [Build order](PROJECT_OVERVIEW.md#build-order).
+
+**Options**
+
+| Option | How it works | Pros | Cons | Solo cost | Risk to invariants |
+|---|---|---|---|---|---|
+| A. One write function | Every group of Ledger entries goes through one function that checks the sum and inserts all entries in one DB transaction | Simple; testable without a DB | A raw SQL insert can bypass it | Low | Low if module boundaries are enforced ([Q-01](#q-01)) |
+| B. DB check at commit | A deferred constraint trigger checks the sum per group when the DB transaction commits | Holds even for raw SQL | Logic in SQL; harder to test and read | Medium | Lowest |
+| C. Both | A as the normal path, B as a safety net | Defense in depth | Two places to keep in line | Medium | Lowest |
+
+**Recommendation.** C, in the same spirit as the `CHECK` constraint behind stock locking ([Q-15](#q-15)): the code path is where the rule is learned, the DB check catches mistakes. The cost of a deferred trigger per insert is not measured (unverified). **Would change it:** a measurement that shows the trigger is too slow (then A only).
+
+**Decision:** C (owner, 2026-11-21): one write function, plus a DB check at commit as a safety net. Answer now lives in: [R-LED-07](domain/ledger.md#r-led-07).
+
+<a id="q-50"></a>
+### Q-50: Which context owns Product reviews and Seller ratings?
+
+**Status:** answered · **Tags:** `product`
+
+**Context.** [Q-36](#q-36) put Product reviews and Seller ratings in the core, but none of the README's 10 contexts owns them, and [EP-25](product/EPICS.md#ep-25) lists no context. A Product review attaches to a Product; a Seller rating also uses Order outcomes. Needed before Build-order step 10.
+
+**Options**
+
+| Option | How it works | Pros | Cons | Solo cost | Risk to invariants |
+|---|---|---|---|---|---|
+| A. Catalog | Reviews and ratings live with Products; Catalog asks Ordering whether the Buyer's Order was delivered | No new context | Catalog grows; the Seller rating reads Order data from another context | Low | None |
+| B. A new Reviews context | An 11th context that owns reviews and ratings | Clear boundary | ARCHITECTURE changes; one more module | Medium | None |
+
+**Recommendation.** A. Reviews do not touch money or stock, so a smaller design is enough. **Would change it:** a Seller rating built mostly from Order outcomes (then B).
+
+**Decision:** A (owner, 2026-11-21): Catalog owns Product reviews and Seller ratings. Answer now lives in: [domain/catalog.md](domain/catalog.md).
+
+<a id="q-51"></a>
+### Q-51: Where do ownership checks live?
+
+**Status:** open
+
+**Context.** Split out of [Q-06](#q-06), whose decision covered roles and tokens but not ownership. RBAC answers "may a Seller edit Products?", not "may this Seller edit this Product?". Needed at Build-order step 9, when the real Identity replaces the stub.
+
+**Options**
+
+| Option | How it works | Pros | Cons | Solo cost | Risk to invariants |
+|---|---|---|---|---|---|
+| A. In each module's application layer | The use case loads the resource and checks its owner against the current user | The owner rule sits next to the data that knows the owner | The check can be forgotten in a new use case | Low | Low |
+| B. One shared guard | A NestJS guard looks up the owner through each context's public interface | One place to read | The guard must know every resource type; couples Identity to every context | Medium | Low |
+
+**Recommendation.** A, with a test per use case that a different Seller gets 403 or 404. **Would change it:** many resource types with the same owner rule (then B).
 
 **Decision:** _pending_

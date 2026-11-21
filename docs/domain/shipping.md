@@ -1,7 +1,7 @@
 ---
 status: draft
 owner: Cuong Vu
-last_verified: 2026-11-16
+last_verified: 2026-11-21
 applies_to: [backend, shipping]
 related_code: []
 ---
@@ -22,12 +22,12 @@ What this context does: the Shipping row of [README: Architecture](../../README.
 ### R-SHP-01: Carrier status updates are deduplicated by event key
 
 - A carrier status update that arrives more than once MUST have one effect. Repeats are found by an event key.
-- Do not apply every webhook as it arrives, because carriers send duplicates and updates out of order → deduplicate by event key, and let a state machine reject invalid transitions (README, The problem). Which state machine: Not decided ([Q-24](../OPEN_QUESTIONS.md#q-24), [Q-28](../OPEN_QUESTIONS.md#q-28)).
+- Do not apply every webhook as it arrives, because carriers send duplicates and updates out of order → deduplicate by event key, and let a state machine reject invalid transitions (README, The problem). Shipping keeps its own Shipment state machine ([Q-24](../OPEN_QUESTIONS.md#q-24)).
 - Source: README, The problem.
 - ✅ "Delivered" arrives twice → one `Delivered` event.
 - ❌ "Delivered" arrives twice → the seller is paid twice.
 
-> OPEN QUESTION Q-28: What is the event key, and does a shipment have its own state machine? DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-28)
+- Event key: the Carrier's own event ID when the Carrier sends one; otherwise Carrier + tracking code + Carrier status + Carrier timestamp. The Carrier adapter builds the key. Source: [Q-28](../OPEN_QUESTIONS.md#q-28) decision (owner, 2026-11-21).
 
 <a id="r-shp-02"></a>
 ### R-SHP-02: Carriers sit behind a port
@@ -38,25 +38,29 @@ What this context does: the Shipping row of [README: Architecture](../../README.
 - Source: README, External integrations.
 - ✅ Tests send out-of-order statuses through the fake. ❌ Tests call GHN staging.
 
+<a id="r-shp-03"></a>
+### R-SHP-03: Failed delivery and return to sender are handled in Shipping
+
+- A failed delivery and the Return to sender that follows MUST be states of the Shipment state machine, owned by Shipping. The Compensation for the Order (Stock and Refund) is fixed in the Shipping spec.
+- Returns after successful delivery and Disputes are a [learning extension](../PROJECT_OVERVIEW.md#learning-extensions).
+- Source: [Q-37](../OPEN_QUESTIONS.md#q-37) decision (owner, 2026-11-21).
+- ✅ The Carrier reports a failed delivery, then the goods come back → the Shipment ends in "returned to sender". ❌ A failed delivery leaves the Order "in transit" forever.
+
 ## Conditional behavior
 
 None yet.
 
 ## Edge cases
 
-- "In transit" arrives after "delivered" → a delivered Order does not go back (README, The problem). Which state machine rejects it, and whether some backward moves are real: Not decided ([Q-24](../OPEN_QUESTIONS.md#q-24), [Q-28](../OPEN_QUESTIONS.md#q-28)).
-- A status from a carrier that is not in the allowed list → not decided: [Q-28](../OPEN_QUESTIONS.md#q-28).
+- "In transit" arrives after "delivered" → a delivered Order does not go back (README, The problem). The Shipment state machine rejects it ([R-SHP-01](#r-shp-01)).
+- A status from a Carrier that is not in the allowed list → the Shipment state machine rejects it ([R-SHP-01](#r-shp-01)).
 
 ## Open questions
 
-> OPEN QUESTION Q-05: How do shipments relate to orders (one order, one shipment)? DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-05)
-
-> OPEN QUESTION Q-43: Does checkout need a Shipping quote before payment? DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-43)
-
-> OPEN QUESTION Q-37: Failed delivery and return to sender: in scope, and which context owns them? DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-37)
-
-> OPEN QUESTION Q-38: Is there a Seller handling step between payment and Shipment? DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-38)
+None. No Shipping quote at checkout ([R-ORD-06](ordering.md#r-ord-06)); a Shipment is created after the Seller confirms ([R-ORD-05](ordering.md#r-ord-05)).
 
 ## Related
+
+- One Order has one Shipment: [R-ORD-04](ordering.md#r-ord-04).
 
 - Consumes `OrderPaid`; publishes `Delivered` to Invoicing and Ledger: [ARCHITECTURE: Data flow](../ARCHITECTURE.md#data-flow)

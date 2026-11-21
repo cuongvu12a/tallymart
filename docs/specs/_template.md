@@ -41,13 +41,25 @@ Each item MUST be checkable by a test or a measurement.
 
 - [ ] <test or measurement that proves it>
 
+## Learning points (owner-written)
+
+The concepts this spec practices, from the [concept map](../LEARNING_MODE.md#concept-map). The owner writes the functions and files listed here. AI writes only owner stubs and failing tests for them ([CLAUDE.md: Learning mode](../../CLAUDE.md#4a-learning-mode)). Write "None" if the spec practices no concept.
+
+| Concept | Functions or files the owner writes | Stub and failing tests ready |
+|---|---|---|
+| [L-NN](../LEARNING_MODE.md#l-nn) <concept name> | `<path>`: `<function>` | [ ] |
+
 ## Out of scope
 
 -
 
-## Open questions
+## Questions this work needs
 
-> OPEN QUESTION Q-NN: <short question>. DO NOT assume. → [details](../OPEN_QUESTIONS.md#q-nn)
+Link each question the work touches, with its Decision. Do not copy a question here: it lives only in [OPEN_QUESTIONS](../OPEN_QUESTIONS.md). A question with `Decision: _pending_` stops the spec ([`/start-spec`](../../.claude/skills/start-spec/SKILL.md)).
+
+| Question | Decision |
+|---|---|
+| [Q-NN](../OPEN_QUESTIONS.md#q-nn) | <one line> |
 
 ## Docs to update when done
 

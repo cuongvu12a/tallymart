@@ -1,7 +1,7 @@
 ---
 status: draft
 owner: Cuong Vu
-last_verified: 2026-11-15
+last_verified: 2026-11-21
 applies_to: [backend, web, repo, docs]
 related_code: []
 ---
@@ -31,9 +31,13 @@ All repo files are in plain English: [R-DOC-03](RULES_AND_CONSTRAINTS.md#r-doc-0
 | Item | Convention | Source |
 |---|---|---|
 | Default branch | `main` | project brief |
-| Branch names, commit message format, PR flow | Not decided | [Q-08](OPEN_QUESTIONS.md#q-08) |
+| Branch name | `<type>/tm-xx-<slug>`, for example `feat/tm-12-reserve-stock`. Docs work with no issue: `docs/<slug>` | [Q-08](OPEN_QUESTIONS.md#q-08) decision |
+| Commit and PR title | Conventional Commits: `<type>(<context>): <summary> (TM-xx)`. Types: `feat`, `fix`, `docs`, `test`, `refactor`, `chore` | [Q-08](OPEN_QUESTIONS.md#q-08) decision |
+| PR flow | One short-lived branch per work item → PR to `main` → CI passes → squash merge, one commit per work item | [Q-08](OPEN_QUESTIONS.md#q-08) decision |
+| Who merges | AI sessions push the branch and open the PR. Only the owner merges, on GitHub. AI MUST NOT merge or push to `main` | [Q-08](OPEN_QUESTIONS.md#q-08) decision |
+| Before CI exists | Work still goes through a PR; checks are run by hand until TM-repo-setup adds CI | [Q-08](OPEN_QUESTIONS.md#q-08) decision |
 
-> OPEN QUESTION Q-08: Branch names, commit message format and PR flow. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-08)
+- ✅ `feat(inventory): reserve stock with TTL (TM-12)` · ❌ `update code`
 
 ## File names in `docs/`
 
@@ -46,19 +50,56 @@ All repo files are in plain English: [R-DOC-03](RULES_AND_CONSTRAINTS.md#r-doc-0
 
 ## Code layout
 
-> OPEN QUESTION Q-01: Folder layout and boundaries inside `apps/api`. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-01)
+Source: [Q-01](OPEN_QUESTIONS.md#q-01) decision (owner, 2026-11-21). Boundary rule: [R-ARCH-02](RULES_AND_CONSTRAINTS.md#r-arch-02).
+
+```
+apps/api/src/modules/<context>/
+  domain/          plain TypeScript: entities, rules, no NestJS, no DB
+  application/     use cases; opens DB transactions; calls domain and ports
+  infrastructure/  repositories, Port implementations (sandbox, fake)
+  api/             controllers, DTOs
+  index.ts         the context's public interface; the only file other contexts import
+```
+
+- Create a layer folder only when it has code. Do not add empty layers.
+- Each context's tables live in a Postgres schema named after the context, for example `inventory`.
+
+## Data
+
+- Primary keys are UUIDs. Prefer UUIDv7 (ordered by time, better for B-tree indexes) when the chosen PostgreSQL version has a built-in generator (PostgreSQL 18 `uuidv7()`, unverified); otherwise UUIDv4. The PostgreSQL version is chosen at TM-repo-setup. Source: owner decision, 2026-11-21.
+- Reason: IDs shown in the API cannot be guessed, and an extracted context keeps its IDs without clashes ([R-ARCH-01](RULES_AND_CONSTRAINTS.md#r-arch-01)).
 
 ## Money
 
-> OPEN QUESTION Q-12: Currency, and how money amounts are stored and passed in code and the API. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-12)
+Source: [Q-12](OPEN_QUESTIONS.md#q-12) decision (owner, 2026-11-21).
+
+- A money amount MUST be an integer in the smallest unit of its currency, stored as a `bigint` column next to a `currency` column with an ISO 4217 code.
+- The core uses VND only. The `currency` column exists so another currency needs no migration (a [learning extension](PROJECT_OVERVIEW.md#learning-extensions)).
+- In TypeScript, a money amount is a `bigint` or a small Money type, never a JS `number`, because float rounding would break [R-LED-01](domain/ledger.md#r-led-01). In JSON, it is a string.
+- Rounding of percentage fees: [Q-19](OPEN_QUESTIONS.md#q-19).
+- ✅ `{"amount": "150000", "currency": "VND"}` · ❌ `{"price": 150000.0}`
 
 ## API
 
-> OPEN QUESTION Q-03: API error format and status codes. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-03)
+- Errors: Problem Details with a stable `code` ([R-API-02](RULES_AND_CONSTRAINTS.md#r-api-02)).
+- Write APIs: `Idempotency-Key` ([R-API-01](RULES_AND_CONSTRAINTS.md#r-api-01)).
 
 ## Tooling
 
-> OPEN QUESTION Q-10: Lint, format and test tooling, and which test levels a task needs to be done. DO NOT assume. → [details](OPEN_QUESTIONS.md#q-10)
+Source: [Q-10](OPEN_QUESTIONS.md#q-10) decision (owner, 2026-11-21). These tools are approved as dependencies ([R-REPO-04](RULES_AND_CONSTRAINTS.md#r-repo-04)); anything else, including ESLint plugins, still needs approval.
+
+| Job | Tool |
+|---|---|
+| Lint | ESLint, with `eslint-plugin-boundaries` for module boundaries ([Q-01](OPEN_QUESTIONS.md#q-01)) |
+| Format | Prettier |
+| Type check | TypeScript compiler, no emit |
+| Unit and integration tests | Jest; Testcontainers for a real Postgres and broker |
+| Mock HTTP for providers | WireMock |
+| End-to-end web tests | Playwright |
+| Load tests | k6 |
+| Network faults | Toxiproxy |
+
+Which test levels a task needs: [R-TEST-03](RULES_AND_CONSTRAINTS.md#r-test-03). Commands: TODO (TM-repo-setup).
 
 ## Preferred and forbidden patterns
 
